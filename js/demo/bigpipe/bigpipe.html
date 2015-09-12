@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>bigpipe前段使用方式</title>
+		<meta name="author" content="ZhangMingrui">
+	</head>
+
+	<body>
+		<p>注意：bigpipe的实现需要后端服务和前端js一起实现，现在仅展示前端的使用。</p>
+		<!--引入bigpipe控制器-->
+		<script src="http://www.libpc.com/js/widget/bigpipe/bigpipe.js"></script>
+		<!--注意：页面基本的css和js框架不要使用BigPipe来异步加载，因为异步加载没有先后顺序，很有可能依赖于requirejs的模块bigpipe_pl_test1.js
+			先加载完成了，requirejs还没加载回来报错-->
+		<script src="http://www.libpc.com/js/manager/requirejs/requirejs2.1.11.js"></script>
+		<script src="http://www.libpc.com/js/config.js"></script>
+		<script>
+			//打开调试
+			//BigPipe._debug = true;
+			//设置资源加载超时时间(毫秒)，默认不检测超时
+			//BigPipe.timeout = 6000;
+		</script>
+        
+        <!--引入自定义模块-->
+		<div id="pl_test1"></div>
+		<script>
+			BigPipe.onArrive({
+				id: 'pl_test1',
+				innerHTML: '<h1>this is my pl_test1 HTML</h1>',
+				css_files: [{
+					path: 'http://www.libpc.com/js/demo/bigpipe/mobiscroll.custom-2.15.1.min.css'
+				}],
+				js_files: [{
+					path: 'http://www.libpc.com/js/demo/bigpipe/bigpipe_pl_test1.js?v=1.0'
+				}]
+			});
+		</script>
+		
+		<!--jquery rangeslider容器-->
+		<div id="pl_rangeslider"></div>
+		<script>
+			BigPipe.onArrive({
+				id: 'pl_rangeslider',
+				is_last: true, //这是最后一个pagelet
+				css_files: [{
+					path: 'http://www.libpc.com/js/demo/bigpipe/rangeslider.css?v=1.0'
+				}],
+				js_files: [{
+					path: 'http://ionden.com/a/plugins/static/js/vendor/modernizr.min.js'
+				}],
+				js_code: function(id){ //id:容器id，没有则为null
+					if(id){
+						document.getElementById(id).innerHTML = id+'的所有资源都加载完成';
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

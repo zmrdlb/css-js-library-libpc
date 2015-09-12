@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>io请求方式1——一般使用方式</title>
+		<meta name="author" content="ZhangMingrui">
+	</head>
+
+	<body>
+		<div id="result"></div>
+		<script src="http://www.libpc.com/js/manager/requirejs/requirejs2.1.11.js"></script>
+		<script src="http://www.libpc.com/js/config.js"></script>
+		<script>
+			requirejs(['$','io/ioconfig','io/interio'],function($,$ioconfig,$interio){
+				var baseUrl = 'http://www.libpc.com/js/demo/io/';
+				//配置未登陆统一处理相关参数
+				/*$ioconfig.login.url = 'http://baidu.com/';
+				$ioconfig.login.filter = function(data){
+					return data.code == 'A0003';
+				};*/
+				
+				//接口配置参数格式请参见$ioconfig.ioargs
+				//配置接口方式1——接口并发请求
+				$ioconfig.setTrans([
+					{name: 'inter1name', args: {url:baseUrl+'inter1.json',method:'GET'}},
+					{name: 'inter2name', args: {url:baseUrl+'inter2.json',method:'GET'}}
+				]);
+				//配置接口方式2——接口加入队列控制依次请求，可通过customconfig.queue配置为true实现
+				/*$ioconfig.setTrans([
+					{name: 'inter1name', args: {url:baseUrl+'inter1.json',method:'GET',customconfig:{queue:true}}},
+					{name: 'inter2name', args: {url:baseUrl+'inter2.json',method:'GET',customconfig:{queue:true}}}
+				]);*/
+				
+				var dom = $('#result');
+				function success(data){
+					dom.append('<h3>'+data.data+'</h3>');
+					console.log('接口请求成功');
+				}
+				function complete(){
+					console.log('接口请求完成');
+				}
+				$interio.transRequest('inter1name',{
+					success: success,
+					complete: complete
+				});
+				$interio.transRequest('inter2name',{
+					success: success,
+					complete: complete
+				});
+			});
+		</script>
+	</body>
+</html>

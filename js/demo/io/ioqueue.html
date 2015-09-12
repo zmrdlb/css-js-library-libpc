@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>io请求方式2——队列控制方式</title>
+		<meta name="author" content="ZhangMingrui">
+	</head>
+
+	<body>
+		<div id="result"></div>
+		<script src="http://www.libpc.com/js/manager/requirejs/requirejs2.1.11.js"></script>
+		<script src="http://www.libpc.com/js/config.js"></script>
+		<script>
+			requirejs(['$','io/ioconfig','io/interio'],function($,$ioconfig,$interio){
+				var baseUrl = 'http://www.libpc.com/js/demo/io/';
+				//配置未登陆统一处理相关参数
+				/*$ioconfig.login.url = 'http://baidu.com/';
+				$ioconfig.login.filter = function(data){
+					return data.code == 'A0003';
+				};*/
+				
+				//配置接口
+				$ioconfig.setTrans([
+					{name: 'inter1name', args: {url:baseUrl+'inter1.json',method:'GET'}},
+					{name: 'inter2name', args: {url:baseUrl+'inter2.json',method:'GET'}}
+				]);
+				var dom = $('#result');
+				function success(data){
+					dom.append('<h3>'+data.data+'</h3>');
+					console.log('接口请求成功');
+				}
+				function complete(){
+					console.log('接口请求完成');
+				}
+				
+				//将一组请求加入队列依次请求，并添加全部请求完毕监听事件
+				$interio.transQueueRequest([
+					{name: 'inter1name', args: {success: success,complete: complete}},
+					{name: 'inter2name', args: {success: success,complete: complete}}
+				],{
+					complete: function(){
+						console.log('接口全部请求完毕');
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
