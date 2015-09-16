@@ -11,9 +11,12 @@
  *   mask.mask; //遮罩dom节点对象
  *   mask.container; //遮罩容器
  *   mask.destroy(); //销毁遮罩
+ *   mask.clickcal.add(function(e){
+ * 	    console.log('遮罩被点击');
+ *   });
  * });
  * */
-define(['$','layer/positionBomb'],function($,$positionBomb){
+define(['$','layer/positionBomb','compatible/deviceevtname'],function($,$positionBomb,$deviceevtname){
 	/**
 	 * 遮罩类——创建遮罩dom并添加到指定容器中 
      * @param {Element} container 遮罩存放容器，默认为$('body')
@@ -21,17 +24,24 @@ define(['$','layer/positionBomb'],function($,$positionBomb){
 	 */
 	function mask(container,config){
 		container = container || $('body');
+		var that = this;
 		var opt = $.extend({
 			bgcolor: '#222', //背景色
 			zIndex: 1, //遮罩z-index
 			opacity: 0.5, //遮罩透明度
 			show: false //创建遮罩后默认是否显示
 		},config || {});
-		var cssstr = 'background:'+opt.bgcolor+';'+opt.show?'':'display:none;'+'opacity:'+opt.opacity+';z-index'+opt.zIndex+';';
+		var cssstr = 'background:'+opt.bgcolor+';'+(opt.show?'':'display:none;')+'z-index:'+opt.zIndex+';';
 		this.container = container; //遮罩容器
 		this.mask = $('<div style="'+cssstr+'"></div>');
 		this.mask.appendTo(container);
+		this.mask.css('opacity',opt.opacity);
 		this.pos = new $positionBomb({layer:this.mask},{mode:'full'});
+		//绑定事件
+		this.clickcal = $.Callbacks(); //遮罩点击后的回调
+		this.mask.on($deviceevtname.click,function(e){
+			that.clickcal.fire(e);
+		});
 	}
 	/**
 	 * 显示遮罩 
@@ -42,23 +52,21 @@ define(['$','layer/positionBomb'],function($,$positionBomb){
 	};
 	/**
 	 * 隐藏遮罩 
-	 * @param {Boolean} destroy 是否销毁，默认不销毁
 	 */
-	mask.prototype.hide = function(destroy){
-		if(destroy){
-			this.destroy();
-		}
-		else{
-			this.mask.hide();
-		}
+	mask.prototype.hide = function(){
+		this.mask.hide();
 	};
 	/**
 	 * 销毁遮罩 
 	 */
 	mask.prototype.destroy = function(){
 		if(this.mask != null){
+			this.mask.off($deviceevtname.click);
 			this.mask.remove();
 			this.mask = null;
+			this.pos.destroy();
+			this.pos = null;
+			this.clickcal = null;
 		}
 	};
 	return mask;

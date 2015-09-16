@@ -33,13 +33,13 @@ define(['$'],function($){
 				hide: null //用户自定义隐藏层的方法。如果此方法存在，则不用默认的隐藏层方法
 			}
 		},config || {});
-		var cssstr = 'position:'+opt.position+';'+opt.show?'':'display:none;'+'z-index'+opt.zIndex;
+		var cssstr = 'position:'+opt.position+';'+(opt.show?'':'display:none;')+'z-index:'+opt.zIndex+';';
 		this.container = container; //浮层容器
-		this.layer = $('<div'+opt.classname == ''?'':' class="'+opt.classname+'"'+' style="'+cssstr+'"></div>');
+		this.layer = $('<div'+(opt.classname == ''?'':' class="'+opt.classname+'"')+' style="'+cssstr+'"></div>');
 		this.layer.appendTo(container);
 		this.showcal = $.Callbacks(); //层显示后的回调
 		this.hidecal = $.Callbacks(); //层隐藏后的回调
-		this.custom = opt.custom; //自定义方法
+		this.custom  = opt.custom; //自定义方法
 	}
 	/**
 	 * 设置层内容 
@@ -53,7 +53,7 @@ define(['$'],function($){
 			this.layer.html(content);
 		}
 		else{
-			this.layer.append(content);
+			this.layer.html('').append(content);
 		}
 	};
 	/**
@@ -73,9 +73,8 @@ define(['$'],function($){
 	};
 	/**
 	 * 隐藏层。会触发hidecal回调
-	 * @param {Boolean} destroy 是否销毁层
 	 */
-	layer.prototype.hide = function(destroy){
+	layer.prototype.hide = function(){
 		if(this.isshow()){
 			this.hidecal.fire('before'); //层隐藏前回调
 			if(typeof this.custom.hide == 'function'){
@@ -83,9 +82,6 @@ define(['$'],function($){
 			}
 			else{
 				this.layer.hide();
-			}
-			if(destroy){
-				this.destroy();
 			}
 			this.hidecal.fire('after'); //层隐藏后回调
 		}
@@ -99,6 +95,8 @@ define(['$'],function($){
 			this.layer = null;
 			this.showcal = null;
 			this.hidecal = null;
+			this.custom = null;
+			this.container = null;
 		}
 	};
 	/**

@@ -3,16 +3,19 @@
  * @version 1.0 | 2015-07-01 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
  * @example
- * requirejs(['extra/evalScript'],function($evalScript){
+ * requirejs(['base/evalScript'],function($evalScript){
  * 	 $evalScript('console.log(1)');
  * });
  * */
 define(function(){
-	return function(src) {
+	/**
+	 * @param {String} jscode js代码字符串 
+	 */
+	return function(jscode) {
 	    if (window.execScript) {
-	        window.execScript(src);
+	        window.execScript(jscode);
 	        return;
 	    }
-	    window.eval.call(window,src);
+	    window.eval.call(window,jscode);
 	};
 });

@@ -16,10 +16,10 @@ define(function(){
 			return false;
 		},
 		/**
-		 * 是否是json 
+		 * 是否是object 
          * @param {Object} data
 		 */
-		isJSON: function(data){
+		isObject: function(data){
 			return Object.prototype.toString.call(data) == '[object Object]';
 		},
 		/**
@@ -28,6 +28,27 @@ define(function(){
 		 */
 		isFunction: function(data){
 			return typeof data == 'function';
+		},
+		/**
+		 * 是否是Array
+         * @param {Object} data
+		 */
+		isArray: function(data){
+			return Object.prototype.toString.call(data) == '[object Array]';
+		},
+		/**
+		 * 是否是boolean
+         * @param {Object} data
+		 */
+		isBoolean: function(data){
+			return typeof data == 'boolean';
+		},
+		/**
+		 * 是否是String
+         * @param {Object} data
+		 */
+		isString: function(data){
+			return typeof data == 'string';
 		}
 	};
 });

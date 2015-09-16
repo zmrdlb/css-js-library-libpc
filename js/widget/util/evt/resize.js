@@ -1,5 +1,4 @@
 /**
- * Copyright (c) 2015 - 2016, Sina Inc. All rights reseved.
  * @fileoverview 
  *   给指定元素创建resize事件监听类
  * @author mingrui| mingrui@staff.sina.com.cn
@@ -36,6 +35,13 @@ define(['$','evt/delayevt'],function($,$delayevt){
      */
 	resize.prototype.listen = function(opt){
 		this.delay.subscribe(opt);
+	};
+	/**
+	 * 移除监听 
+     * @param {Object} opt 和调用listen时一样的参数引用
+	 */
+	resize.prototype.unlisten = function(opt){
+		this.delay.unsubscribe(opt);
 	};
 	return resize;
 });

@@ -1,5 +1,4 @@
 /**
- * Copyright (c) 2015 - 2016, Sina Inc. All rights reseved.
  * @fileoverview 
  *   监听window resize。只支持PC
  * @author mingrui| mingrui@staff.sina.com.cn

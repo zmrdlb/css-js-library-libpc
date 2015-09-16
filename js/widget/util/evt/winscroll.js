@@ -1,5 +1,4 @@
 /**
- * Copyright (c) 2015 - 2016, Sina Inc. All rights reseved.
  * @fileoverview 
  *   窗口滚动事件监听
  * @author mingrui| mingrui@staff.sina.com.cn

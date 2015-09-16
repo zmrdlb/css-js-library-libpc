@@ -15,7 +15,7 @@ define(['$','base/checkDataType','classdesign/rwcontroller'],function($,$checkDa
 	 * 参数有效性验证 
 	 */
 	Publisher.prototype.argsValidate = function(data){
-		if($checkDataType.isJSON(data) && $checkDataType.isFunction(data.call)){
+		if($checkDataType.isObject(data) && $checkDataType.isFunction(data.call)){
 			return true;
 		}
 		return false;
