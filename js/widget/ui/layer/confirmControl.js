@@ -1,5 +1,6 @@
 /**
- * @fileoverview confrim类创建的控制工厂，一般用于简单的confirm信息提示
+ * @fileoverview confrim类创建的控制工厂，一般用于简单的confirm信息提示。
+ * 注意：该confrim控制的对象及dom在全局中唯一存在，如果想要创建多个，请使用layer/confirm
  * @version 1.0.0 | 2015-09-16 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
  * @example
@@ -13,12 +14,16 @@
 			}
 		});
 		$confirmControl.getconfirm()； //layer/confirm类对象
-		$confirmControl.show('您还未登陆',function(){
-			console.log('点击确定');
+		$confirmControl.show({
+		    content: '您还未登陆'
+		},{
+		    ok: function(){
+                console.log('点击好的');
+            }
 		});
    });
  * */
-define(['layer/confirm','base/checkDataType'],function($confirm,$checkDataType){
+define(['layers/confirm','base/checkDataType'],function($confirm,$checkDataType){
     /**
      * confirm工厂模型控制器
      */
@@ -52,10 +57,10 @@ define(['layer/confirm','base/checkDataType'],function($confirm,$checkDataType){
 		},
 		/**
 		 * 显示弹层 
-		 * @param {Object} *txt 文案配置。除了content必填，其他选填。如果setconfig调用设置的模板中还有其他node="其他值"，
+		 * @param {Object} *txt 文案配置,选填。如果setconfig调用设置的模板中还有其他node="其他值"，
 		 * 		如node="other" 则可自行扩展
 		 * {
-		 * 	 *content {String} node="content"节点里面的html
+		 * 	 content {String} node="content"节点里面的html
 		 *   title {String} node="title"节点里面的html
 		 *   ok {String} node="ok"节点里面的html
 		 *   cancel {String} node="cancel"节点里面的html
@@ -69,35 +74,31 @@ define(['layer/confirm','base/checkDataType'],function($confirm,$checkDataType){
 			if(!$checkDataType.isObject(txt)){
 				throw new Error('confirmControl-show方法txt参数必须是json对象');
 			}else{
-				if(!$checkDataType.isString(txt.content)){
-					throw new Error('confirmControl-show方法txt参数里面的content必填且必须是字符串');
-				}else{
-					if($checkDataType.isObject(cal)){
-						var funname = ['ok','cancel'];
-						for(var i = 0, len = funname.length; i < len; i++){
-							if($checkDataType.isFunction(cal[funname[i]])){
-								this['_'+funname[i]+'cal'] = cal[funname[i]];
-							}
-							else{
-								this['_'+funname[i]+'cal'] = function(){};
-							}
-						}
-					}else{
-						this._okcal = function(){};
-						this._cancelcal = function(){};
-					}
-					//获取txt里面的键值
-					var nodenamearr = [];
-					for(var name in txt){
-						nodenamearr.push(name);
-					}
-					this.getconfirm();
-					var nodearr = this._confirm.getNodes(nodenamearr);
-					for(var name in nodearr){
-						$checkDataType.isString(txt[name]) && nodearr[name].html(txt[name]);
-					}
-					this._confirm.show();
-				}
+				if($checkDataType.isObject(cal)){
+                    var funname = ['ok','cancel'];
+                    for(var i = 0, len = funname.length; i < len; i++){
+                        if($checkDataType.isFunction(cal[funname[i]])){
+                            this['_'+funname[i]+'cal'] = cal[funname[i]];
+                        }
+                        else{
+                            this['_'+funname[i]+'cal'] = function(){};
+                        }
+                    }
+                }else{
+                    this._okcal = function(){};
+                    this._cancelcal = function(){};
+                }
+                //获取txt里面的键值
+                var nodenamearr = [];
+                for(var name in txt){
+                    nodenamearr.push(name);
+                }
+                this.getconfirm();
+                var nodearr = this._confirm.getNodes(nodenamearr);
+                for(var name in nodearr){
+                    $checkDataType.isString(txt[name]) && nodearr[name].html(txt[name]);
+                }
+                this._confirm.show();
 			}
 		},
 		/**

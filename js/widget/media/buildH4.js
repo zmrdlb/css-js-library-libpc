@@ -16,7 +16,7 @@ define(['$','json/jsonToQuery','media/mediatype'],function($,jsonToQuery,mediaty
   	var _embedhtml = ['<embed pluginspage="'+typeobj.pluginpage+'" type="'+typeobj.h4type+'"'];
       for(var i in attObj){ //构建attribute
       	var ii = i.toLowerCase();
-        if (attObj[i] != Object.prototype[i]) { // filter out prototype additions from other potential libraries
+        if (attObj.propertyIsEnumerable(i)) { // filter out prototype additions from other potential libraries
 			if (ii == "data") {
 				_embedhtml.push('src="'+attObj[i]+'"');
 			}
@@ -29,20 +29,22 @@ define(['$','json/jsonToQuery','media/mediatype'],function($,jsonToQuery,mediaty
 		}
       }
 	  for (var p in parObj) { //构建param
-		_embedhtml.push(p+'="'+parObj[p]+'"');
+	      if(parObj.propertyIsEnumerable(p)){
+	          _embedhtml.push(p+'="'+parObj[p]+'"');
+	      }
 	  }
       _embedhtml.push("/>");
       _embedhtml = _embedhtml.join(' ');
       //构建object
       var att = [];
 		for (var i in attObj) { //构建attribute
-			if (attObj[i] != Object.prototype[i]) { // filter out prototype additions from other potential libraries
+			if (attObj.propertyIsEnumerable(i)) { // filter out prototype additions from other potential libraries
 				if (i.toLowerCase() == "data") {
 					var cururl = attObj[i];
-					for(var m in typeobj.keysattribute){
+					for(var m = 0, mlen = typeobj.keysattribute.length; m < mlen; m++){
 						att.push(typeobj.keysattribute[m]+'="' + cururl + '"');
 					}
-					for(var n in typeobj.keysparam){
+					for(var n = 0, nlen = typeobj.keysparam.length; n < nlen; n++){
 						parObj[typeobj.keysparam[n]] = cururl;
 					}
 				}
@@ -56,7 +58,7 @@ define(['$','json/jsonToQuery','media/mediatype'],function($,jsonToQuery,mediaty
 		}
 		var par = [];
 		for (var j in parObj) { //构建param
-			if (parObj[j] != Object.prototype[j]) { // filter out prototype additions from other potential libraries
+			if (parObj.propertyIsEnumerable(j)) { // filter out prototype additions from other potential libraries
 				par.push('<param name="' + j + '" value="' + parObj[j] + '" />');
 			}
 		}

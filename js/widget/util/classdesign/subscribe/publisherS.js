@@ -27,7 +27,7 @@ define(['$','base/checkDataType','classdesign/rwcontroller'],function($,$checkDa
 	Publisher.prototype.deliver = function(){
 		this.rwcontrollder.read($.proxy(function(data){
 			$.each(this.subscribers,function(index,item){
-				if(item.filter()){
+				if(item.filter() == true){
 		        	item.call.apply(window,data.args);
 		      	}
 			});

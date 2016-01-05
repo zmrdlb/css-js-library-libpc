@@ -49,6 +49,11 @@ define(['$'],function($){
 		}
 	};
 	/**
+	 * 每个请求发送之前，统一格式化参数配置（格式同ioargs）。
+	 * 应用场景： 每个业务项目需要配置统一的参数处理。如返回数据result.errorcode == 0时才调用success，其他都调用error
+	 */
+	that.format = function(opt){};
+	/**
 	 * 设置 接口配置
 	 * @param {Array} optarr
 	 * [{

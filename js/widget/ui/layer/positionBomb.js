@@ -17,6 +17,7 @@ define(['$','compatible/csssuport','evt/winresize','evt/winscroll','evt/resize',
 	 */
 	function setpos(domopt,posopt){
 		var cssopt = {},layer = domopt.layer,offcon = domopt.offcon;
+		layer.css('position',domopt.position);
 		var marginLeft = 0, marginTop = 0;
 		if(domopt.position == 'absolute'){
 			marginLeft = offcon.scrollLeft();
@@ -29,11 +30,11 @@ define(['$','compatible/csssuport','evt/winresize','evt/winscroll','evt/resize',
 				cssopt.top = '50%';
 				cssopt.left = '50%';
 				break;
-			case 'full': //满屏定位，占满整个定位容器
+			case 'full': //满屏定位，占满整个定位容器。本来不设置width和height，设置了right和bottom。但是偶发margin不起作用，此时读取的元素尺寸为0.
+			    cssopt.width = '100%';
+                cssopt.height = '100%';
 				cssopt.top = '0';
 				cssopt.left = '0';
-				cssopt.bottom = '0';
-				cssopt.right = '0';
 				break;
 		}
 		cssopt.marginLeft = marginLeft+'px';
@@ -70,34 +71,32 @@ define(['$','compatible/csssuport','evt/winresize','evt/winscroll','evt/resize',
 		},config || {});
 		var that = this;
 		//初步检测定位参考容器
-		domopt.layer.css('position','absolute');
 		domopt.offcon = domopt.layer.offsetParent();
 		var tagname = domopt.offcon.get(0).tagName.toLowerCase();
 		if(tagname == 'body' || tagname == 'html'){ //说明相对于页面定位
+		    domopt.offcon = $('body');
 			domopt.offpage = true;
 		}
 		if(domopt.offpage && posopt.fixed && canFix){ //如果定位容器是当前页面、固定定位、可使用fixed定位。则用fixed定位
 			domopt.position = 'fixed';
 		}
-		else{ //不管定位容器是body还是其他容器。如果是absolute，都得监听resize和scroll事件
+		else{ 
 			domopt.position = 'absolute';
-			var listencall = {
-				call: function(){
-					that.setpos();
-				}
-			};
-			if(domopt.offpage){
-				$winresize.listen(listencall);
-				$winscroll.listen(listencall);
-			}
-			else{
-				var resize = new $resize(domopt.offcon);
-				resize.listen(listencall);
-				var scroll = new $resize(domopt.offcon);
-		 		scroll.listen(listencall);
+			if(posopt.fixed) { //如果固定定位，则监听scroll事件
+			    var listencall = {
+                    call: function(){
+                        that.setpos();
+                    }
+                };
+                if(domopt.offpage){
+                    $winscroll.listen(listencall);
+                }
+                else{
+                    var scroll = new $resize(domopt.offcon);
+                    scroll.listen(listencall);
+                }
 			}
 		}
-		domopt.layer.css('position',domopt.position);
 		this.domopt = domopt; //dom参数
 		this.posopt = posopt; //定位参数
 		this.destroy = function(){ //组件销毁方法
@@ -105,10 +104,8 @@ define(['$','compatible/csssuport','evt/winresize','evt/winscroll','evt/resize',
 			this.posopt = null;
 			if(listencall){
 				if(domopt.offpage){
-					$winresize.unlisten(listencall);
 					$winscroll.unlisten(listencall);
 				}else{
-					resize.unlisten(listencall);
 					scroll.unlisten(listencall);
 				}
 			}

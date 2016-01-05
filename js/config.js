@@ -16,20 +16,26 @@
 			'media': 'widget/media',
 			'json': 'widget/util/json',
 			'channel': 'widget/util/channel',
-			'layer': 'widget/ui/layer',
+			'layers': 'widget/ui/layer',
+			'nav': 'widget/ui/nav',
 			'inherit': 'widget/util/inherit',
 			'evt': 'widget/util/evt',
+			'dom': 'widget/util/dom',
 			'compatible': 'widget/util/compatible',
 			'bigpipe': 'widget/bigpipe',
 			'load': 'widget/util/load',
 			'base': 'widget/util/base',
 			'classdesign': 'widget/util/classdesign',
-			'tpl': 'widget/util/tpl'
+			'tpl': 'widget/util/tpl',
+			'page': 'widget/ui/page'
 		}
 	};
 	requirejs.config(mod);
 })();
-
+/**
+ * 定义模块名为$的模块，意为js框架引用。所有的其他js调用js框架均使用define(['$'])来调用。
+ * 这样做是为了解决js框架和核心代码库libpc之间的耦合，便于将js框架替换成不是jquery但是api使用方法类似于jquery的 js框架。如替换成zepto等
+ */
 define('$',['jquery'],function($){
 	return $;
 });

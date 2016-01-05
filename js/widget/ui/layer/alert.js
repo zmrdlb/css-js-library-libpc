@@ -29,7 +29,7 @@
  *   layer.destroy(); //销毁层
  * });
  * */
-define(['$','layer/bombLayer','layer/tpl','compatible/deviceevtname','inherit/extendClass'],function($,$bombLayer,$tpl,$deviceevtname,$extendClass){
+define(['$','layers/bombLayer','layers/tpl','compatible/deviceevtname','inherit/extendClass'],function($,$bombLayer,$tpl,$deviceevtname,$extendClass){
 	/**
 	 * alert类
      * @param {Object} config 参数同layer/bombLayer里面的config,在此基础上增加如下默认配置

@@ -16,7 +16,7 @@
  *   });
  * });
  * */
-define(['$','layer/positionBomb','compatible/deviceevtname'],function($,$positionBomb,$deviceevtname){
+define(['$','layers/positionBomb','compatible/deviceevtname'],function($,$positionBomb,$deviceevtname){
 	/**
 	 * 遮罩类——创建遮罩dom并添加到指定容器中 
      * @param {Element} container 遮罩存放容器，默认为$('body')
@@ -31,7 +31,7 @@ define(['$','layer/positionBomb','compatible/deviceevtname'],function($,$positio
 			opacity: 0.5, //遮罩透明度
 			show: false //创建遮罩后默认是否显示
 		},config || {});
-		var cssstr = 'background:'+opt.bgcolor+';'+(opt.show?'':'display:none;')+'z-index:'+opt.zIndex+';';
+		var cssstr = 'position:absolute;background:'+opt.bgcolor+';'+(opt.show?'':'display:none;')+'z-index:'+opt.zIndex+';';
 		this.container = container; //遮罩容器
 		this.mask = $('<div style="'+cssstr+'"></div>');
 		this.mask.appendTo(container);

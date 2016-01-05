@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>alertControl-简单alert消息提示</title>
+		<meta name="author" content="ZhangMingrui">
+	</head>
+
+	<body>
+		<p>简单消息提示alert，使用layer/alertControl。如果是复杂的业务alert，则建议直接使用layer/alert。
+			如果基本弹层业务，直接使用弹层基类layer/bombLayer</p>
+		<script src="http://www.libpc.com/js/manager/requirejs/requirejs2.1.11.js"></script>
+		<script src="http://www.libpc.com/js/config.js"></script>
+		<script>
+			requirejs(['layers/alertControl'],function($alertControl){
+				$alertControl.setconfig({
+					alert: {
+							frametpl: [
+							    '<div node="title"></div>',
+								'<div node="content"></div>',
+								'<div><a href="javascript:;" node="ok">好的</a></div>'
+							].join('')
+					}
+				});
+				$alertControl.getalert().layer.css('background-color','#fff');
+				$alertControl.show({
+					title: '登陆信息',
+					content: '您还未登陆',
+					ok: '去登陆'
+				},{
+					ok: function(){
+						console.log('点击确定');
+					}
+				});
+		   });
+		</script>
+	</body>
+</html>

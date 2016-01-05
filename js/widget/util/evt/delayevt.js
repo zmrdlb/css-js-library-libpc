@@ -17,7 +17,7 @@ define(['$','inherit/extendClass','classdesign/subscribe/publisherS'],function($
 		Delayevt.superclass.constructor.call(this);
 		this.timer = null; 
 		$.extend(this,{
-			delaytime: 300 //事件检测延迟时间，毫秒
+			delaytime: 200 //事件检测延迟时间，毫秒
 		},config || {});
 	}
 	$extendClass(Delayevt,$publisherS);

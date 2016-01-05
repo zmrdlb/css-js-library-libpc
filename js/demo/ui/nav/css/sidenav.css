@@ -1,0 +1,41 @@
+/**
+ * @fileoverview 详情页侧边导航
+ * @version 1.0.0 | 2015-11-16 版本信息
+ * @author Zhang Mingrui | 592044573@qq.com
+ */
+.sidenav-wrapper {
+  position: fixed;
+  bottom: 10px;
+}
+.sidenav-wrapper .bar {
+  position: absolute;
+  width: 2px;
+  background-color: #e0e0e0;
+  top: 28px;
+  bottom: 28px;
+  left: 4px;
+  z-index: 1;
+}
+.sidenav-wrapper ul {
+  position: relative;
+  z-index: 2;
+  list-style: none;
+  font-size: 16px;
+  line-height: 1;
+  color: #e0e0e0;
+}
+.sidenav-wrapper ul a {
+  color: #999;
+}
+.sidenav-wrapper ul li {
+  padding: 20px 0;
+}
+.sidenav-wrapper ul li.cur {
+  color: #007aff;
+}
+.sidenav-wrapper ul li.cur a {
+  color: #007aff;
+}
+.sidenav-wrapper ul i {
+  margin-right: 14px;
+}

@@ -85,6 +85,7 @@ define(['$','io/ioconfig'],function($,$ioconfig){
 	function format(ioopt,queueobj){
 		var conf = {};
 		$.extend(true,conf,$ioconfig.ioargs,ioopt);
+		$ioconfig.format(conf);
 		var oldsuccess = conf.success;
 		var oldcomplete = conf.complete;
 		var deallogin = conf.customconfig.deallogin;

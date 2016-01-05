@@ -1,0 +1,42 @@
+/**
+ *    详情页横向分页组件样式
+ *    zhangmingrui
+ */
+@charset "utf-8";
+.horpage-wrapper {
+  text-align: center;
+  font-size: 16px;
+  line-height: 1;
+}
+.horpage-wrapper a {
+  padding: 0 10px;
+  text-decoration: none;
+  color: #999;
+}
+.horpage-wrapper .page:hover {
+  color: #747474;
+  text-decoration: underline;
+}
+.horpage-wrapper .page.cur {
+  color: #007aff;
+}
+.horpage-wrapper .page.cur:hover {
+  color: #007aff;
+}
+.horpage-wrapper .disabled,
+.horpage-wrapper .cur,
+.horpage-wrapper .ellipsis {
+  cursor: default;
+}
+.horpage-wrapper .disabled:hover,
+.horpage-wrapper .cur:hover,
+.horpage-wrapper .ellipsis:hover {
+  text-decoration: none;
+}
+.horpage-wrapper .pn-icon:hover {
+  color: #007aff;
+  text-decoration: none;
+}
+.horpage-wrapper .pn-icon.disabled {
+  color: #999;
+}

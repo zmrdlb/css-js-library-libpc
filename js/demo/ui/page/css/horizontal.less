@@ -1,0 +1,43 @@
+/**
+ *    详情页横向分页组件样式
+ *    zhangmingrui
+ */
+@import "../../../../dependence/core";
+
+.horpage-wrapper {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1;
+    a {
+        padding: 0 10px;
+        text-decoration: none;
+        color: #999;
+    }
+    .page {
+        &:hover {
+            color: #747474;
+            text-decoration: underline;
+        }
+        &.cur {
+            color: #007aff;
+            &:hover {
+                color: #007aff;
+            }
+        }
+    }
+    .disabled,.cur,.ellipsis { //不可用样式
+        cursor: default;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    .pn-icon { //上一页下一页
+        &:hover {
+            color: #007aff;
+            text-decoration: none;
+        }
+        &.disabled {
+            color: #999;
+        }
+    }
+}

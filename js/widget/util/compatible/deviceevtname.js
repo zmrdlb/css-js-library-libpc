@@ -6,5 +6,19 @@
  * */
 define({
 	//点击事件的事件名称
-	click: 'click'
+	click: 'click',
+	//input或textarea输入框值改变的监听事件
+	input: (function(){
+	    if(/MSIE 9.0/.test(navigator.userAgent)){ //Ie9那个坑爹的，本来input和propertychange都支持，但是删除键无法触发这两个事件，所以得添加keyup
+	        return 'input keyup';
+	    }
+	    var node = document.createElement('input');
+	    if('oninput' in node){
+	        return 'input';
+	    }else if('onpropertychange' in node){
+	        return 'propertychange';
+	    }else {
+	        return 'keyup';
+	    }
+	})()
 });

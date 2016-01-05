@@ -17,7 +17,7 @@
  *   layer.destroy(); //销毁层
  * });
  * */
-define(['$','layer/layer','layer/mask','inherit/extendClass','layer/positionBomb','compatible/deviceevtname','base/checkDataType'],function($,$layer,$mask,$extendClass,$positionBomb,$deviceevtname,$checkDataType){
+define(['$','layers/layer','layers/mask','inherit/extendClass','layers/positionBomb','compatible/deviceevtname','base/checkDataType'],function($,$layer,$mask,$extendClass,$positionBomb,$deviceevtname,$checkDataType){
 	/**
 	 * 弹层类——创建并添加到指定容器中
      * @param {JSON} config 弹层配置参数 ，不是必填项

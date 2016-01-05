@@ -4,8 +4,8 @@
  * @author Zhang Mingrui
  * @param {Object} *config
  *    {
- * 	     url: '' 媒体资源
- *       id: '', video或audio的id
+ * 	     *url: '' 媒体资源
+ *       *id: '', video或audio的id
  *       width: 200,
  *       height: 200,
  *       h5attr: {
