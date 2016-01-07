@@ -1,14 +1,36 @@
 /**
  * * @fileoverview 对于异步数据请求渲染列表这类应用场景，统一处理状态显示。
+ * 1. 应用场景：
+ *      1) 一次性渲染的列表数据。即每次渲染的数据都直接覆盖容器，不会添加到容器后面保留旧数据。
+ *      2) 瀑布流方式的数据渲染。即每次请求回来的新数据都添加到旧数据后面，这样的话，每次状态提示的位置都不同。
+ *    此组件对于以上2种场景都适用，但是对于第2种场景操作比较复杂，建议使用fallMsgTips
+ * 
+ * 2. 优点：
+ *      1) 信息提示位置灵活控制，根据传入的container和append来控制
  * @version 1.0.0 | 2015-11-02 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 各种状态处理方法
  * @example
- *   requirejs(['base/btnMsgTips'],function($btnMsgTips){
+ *   requirejs(['base/listMsgTips'],function($listMsgTips){
     	node.click(function(){
-    		$btnMsgTips.start($(this),'loading'); //开始交互
-    		$btnMsgTips.end($(this),'loading'); //结束交互
-    		$btnMsgTips.error('投票失败'); //错误提示
+    	    var container = $(this);
+    	    $listMsgTips.loading({
+    	        container: container
+    	    });
+    	    $listMsgTips.error({
+                container: container
+            });
+            $listMsgTips.empty({
+                container: container
+            });
+            $listMsgTips.bindError({ //绑定点击“请重试”按钮的回调
+                container: container,
+                call: function(e){ //点击请重试后，则重新加载数据}
+            });
+            $listMsgTips.remove({ //移除loading的提示
+                container: container,
+                type: 'loading'
+            });
     	});
      });
  */
@@ -96,7 +118,7 @@ define(['$','base/checkDataType','compatible/deviceevtname','base/template'],fun
 		        throw new Error('组件listMsgTips-bindError传入参数错误');
 		    }
 		    opt.container.on($deviceevtname.click,'[node="retry"]',function(e){
-		        opt.call();
+		        opt.call(e);
 		    });
 		},
 		/**
