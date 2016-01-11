@@ -4,7 +4,6 @@
  * 特别说明：
  * 		1.如果元素的display:none，则所有位置信息都为0。
  * 		2.首次调用组件时会自动计算元素相对于window的位置并触发监听。
- *      3.窗口scroll的监听触发有延迟，为了提高性能
  * @version 1.0 | 2015-10-22 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 调用方法
@@ -17,7 +16,7 @@
  * 		});	
  *  });
  */
-define(['$','base/checkDataType','dom/positionWin','evt/winscroll'],function($,$checkDataType,$positionWin,$winscroll){
+define(['$','base/checkDataType','dom/positionWin'],function($,$checkDataType,$positionWin){
 	var cache = []; //数据缓存
 	/**
 	 * 获取位置
@@ -39,8 +38,8 @@ define(['$','base/checkDataType','dom/positionWin','evt/winscroll'],function($,$
 	};
 	
 	//绑定窗口scroll的监听
-	$winscroll.listen({
-		call: notify
+	$(window).on('scroll',function(e){
+	    notify();
 	});
 	
 	return {
@@ -73,7 +72,9 @@ define(['$','base/checkDataType','dom/positionWin','evt/winscroll'],function($,$
 			//加入缓存
 			cache.push(opt);
 			//首次计算位置
-			getPos(opt);
+			if(opt.filter() == true){
+                getPos(opt);
+            }
 		}
 	};
 });

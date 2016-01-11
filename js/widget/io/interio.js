@@ -89,8 +89,9 @@ define(['$','io/ioconfig'],function($,$ioconfig){
 		var oldsuccess = conf.success;
 		var oldcomplete = conf.complete;
 		var deallogin = conf.customconfig.deallogin;
+		var dealerror = conf.customconfig.dealerror;
 		conf.success = function(data, textStatus, jqXHR){ //重写success方法，用来处理未登陆问题
-			if(deallogin && $ioconfig.login.url != '' && typeof $ioconfig.login.filter == 'function'){ //监测是否有未登陆错误
+			if(deallogin && $ioconfig.login.url != '' && typeof $ioconfig.login.filter == 'function'){ //监测是否有未登陆错误处理
 				if($ioconfig.login.filter(data)){
 					var loginurl = $ioconfig.login.url;
 					var search = $ioconfig.login.key+'='+encodeURIComponent(location.href);
@@ -103,6 +104,14 @@ define(['$','io/ioconfig'],function($,$ioconfig){
 					location.href = loginurl;
 					return;
 				}
+			}
+			if(dealerror && typeof $ioconfig.error.filter == 'function'){ //监测是否有业务错误处理
+			    if($ioconfig.error.filter(data)){
+			        if(typeof conf[$ioconfig.error.funname] == 'function'){
+			            conf[$ioconfig.error.funname](data, textStatus, jqXHR);
+			        }
+			        return;
+			    }
 			}
 			typeof oldsuccess == 'function' && oldsuccess(data, textStatus, jqXHR);
 		};
@@ -166,10 +175,10 @@ define(['$','io/ioconfig'],function($,$ioconfig){
 		 * 对一组请求进行单独的队列控制依次请求。全部请求完毕后进行通知。
 		 * 此情况下，通过ioconfig.js中setTrans方法设置的参数配置customconfig:{queue:true|false}无效。强制都走队列
  		 * @param {Array} *argsarr 接口请求数组
- 		 * {
+ 		 * [{
  		 * 	  {String} *name 接口名称。对应ioconfig.js里的settrans方法配置项的name
  		 *    {JSON} args 接口扩展参数。对应ioconfig.js里的ioargs配置格式
- 		 * }
+ 		 * }]
  		 * @param {JSON} customobj 用户自定义扩展参数
  		 * {
  		 * 	  {Function} complete 接口全部请求完毕后的通知回调

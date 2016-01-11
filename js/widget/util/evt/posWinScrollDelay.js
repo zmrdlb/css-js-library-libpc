@@ -4,6 +4,7 @@
  * 特别说明：
  * 		1.如果元素的display:none，则所有位置信息都为0。
  * 		2.首次调用组件时会自动计算元素相对于window的位置并触发监听。
+ *      3.窗口scroll的监听触发有延迟，为了提高性能
  * @version 1.0 | 2015-10-22 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 调用方法
@@ -16,7 +17,7 @@
  * 		});	
  *  });
  */
-define(['$','base/checkDataType','dom/positionWin'],function($,$checkDataType,$positionWin){
+define(['$','base/checkDataType','dom/positionWin','evt/winscroll'],function($,$checkDataType,$positionWin,$winscroll){
 	var cache = []; //数据缓存
 	/**
 	 * 获取位置
@@ -38,8 +39,8 @@ define(['$','base/checkDataType','dom/positionWin'],function($,$checkDataType,$p
 	};
 	
 	//绑定窗口scroll的监听
-	$(window).on('scroll',function(e){
-	    notify();
+	$winscroll.listen({
+		call: notify
 	});
 	
 	return {
@@ -55,7 +56,8 @@ define(['$','base/checkDataType','dom/positionWin'],function($,$checkDataType,$p
 						tt: 0, //元素顶部距离window顶部的距离。>0表示元素顶部在window顶部下面；<0表示元素顶部在window顶部上面
 						bt: 0, //元素底部距离window顶部的距离。>0表示元素底部在window顶部下面；<0表示元素底部在window顶部上面
 						ll: 0, //元素左部距离window左部的距离。>0表示元素左部在window左部右面；<0表示元素左部在window左部左面
-						rl: 0 //元素右部距离window左部的距离。>0表示元素右部在window左部右面；<0表示元素右部在window左部左面
+						rl: 0, //元素右部距离window左部的距离。>0表示元素右部在window左部右面；<0表示元素右部在window左部左面
+						bb: 0  //元素底部距离window底部的距离。>0表示元素底部在window底部上面；<0表示元素底部在window底部下面
 					}
 					node: 当前dom对象
 	 	 * 			
@@ -72,7 +74,9 @@ define(['$','base/checkDataType','dom/positionWin'],function($,$checkDataType,$p
 			//加入缓存
 			cache.push(opt);
 			//首次计算位置
-			getPos(opt);
+			if(opt.filter() == true){
+                getPos(opt);
+            }
 		}
 	};
 });

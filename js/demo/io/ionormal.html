@@ -20,11 +20,17 @@
 					return data.code == 'A0003';
 				};*/
 				
+				//配置业务错误统一处理相关参数
+				$ioconfig.error.filter = function(data){
+				    return data.code != 'A0001';
+				};
+				
 				//接口配置参数格式请参见$ioconfig.ioargs
 				//配置接口方式1——接口并发请求
 				$ioconfig.setTrans([
 					{name: 'inter1name', args: {url:baseUrl+'inter1.json',method:'GET'}},
-					{name: 'inter2name', args: {url:baseUrl+'inter2.json',method:'GET'}}
+					{name: 'inter2name', args: {url:baseUrl+'inter2.json',method:'GET'}},
+					{name: 'inter3name', args: {url:baseUrl+'inter3.json',method:'GET'}}
 				]);
 				//配置接口方式2——接口加入队列控制依次请求，可通过customconfig.queue配置为true实现
 				/*$ioconfig.setTrans([
@@ -40,14 +46,29 @@
 				function complete(){
 					console.log('接口请求完成');
 				}
+				function error(data){
+				    console.log('业务错误和网络错误都调用此处理。如果是业务错误，data则是接口返回的数据；如果是系统错误，data则是jquery ajax error方法的第一个参数');
+				    if(data && data.errormsg){
+				        console.log(errormsg);
+				    }else{
+				        console.log('请求接口调用了jquery ajax error的配置方法');
+				    }
+				}
 				$interio.transRequest('inter1name',{
 					success: success,
+					error: error,
 					complete: complete
 				});
 				$interio.transRequest('inter2name',{
 					success: success,
+					error: error,
 					complete: complete
 				});
+				$interio.transRequest('inter3name',{
+                    success: success,
+                    error: error,
+                    complete: complete
+                });
 			});
 		</script>
 	</body>

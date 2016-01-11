@@ -18,20 +18,24 @@ define(['$'],function($){
 			tt: 0, //元素顶部距离window顶部的距离。>0表示元素顶部在window顶部下面；<0表示元素顶部在window顶部上面
 			bt: 0, //元素底部距离window顶部的距离。>0表示元素底部在window顶部下面；<0表示元素底部在window顶部上面
 			ll: 0, //元素左部距离window左部的距离。>0表示元素左部在window左部右面；<0表示元素左部在window左部左面
-			rl: 0 //元素右部距离window左部的距离。>0表示元素右部在window左部右面；<0表示元素右部在window左部左面
+			rl: 0, //元素右部距离window左部的距离。>0表示元素右部在window左部右面；<0表示元素右部在window左部左面
+			bb: 0  //元素底部距离window底部的距离。>0表示元素底部在window底部上面；<0表示元素底部在window底部下面
 		};
 		if(node.css('display') == 'none'){
 			return pos;
 		}
+		var winNode = $(window);
 		var nheight = node.outerHeight? node.outerHeight(): node.height(); //元素高度
 		var nwidth = node.outerWidth? node.outerWidth(): node.width(); //元素宽度
 		var noffset = node.offset(); //元素相对于文档的位置信息
-		var wscrollTop = $(window).scrollTop(); //页面的scrollTop
-		var wscrollLeft = $(window).scrollLeft(); //页面的scrollLeft
+		var wscrollTop = winNode.scrollTop(); //页面的scrollTop
+		var wscrollLeft = winNode.scrollLeft(); //页面的scrollLeft
+		var wheight = winNode.height(); //window高度
 		pos.tt = noffset.top - wscrollTop;
 		pos.bt = noffset.top + nheight - wscrollTop;
 		pos.ll = noffset.left - wscrollLeft;
 		pos.rl = noffset.left + nwidth - wscrollLeft;
+		pos.bb = wscrollTop + wheight - noffset.top - nheight;
 		return pos;
 	};
 });
