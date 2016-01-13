@@ -7,7 +7,7 @@
      *   var tabobj = tabswitch(容器节点,{
              tabSelector: '[node="tab"]', //tab选择器
              conSelector: '[node="tabcon"]', //tab内容区选择器
-             tabchange: function(index,type){
+             tabchange: function(index,type,tabnode,connode){
                  console.log(index);
                  console.log(type);
              }
@@ -33,10 +33,12 @@ define(['$','dom/checknode','base/checkDataType','compatible/deviceevtname'], fu
              * tab切换的回调，会防止重复点击。
              * @param index 当前index的索引，从1开始
              * @param type 触发tabchange的类型。 
-             *      'click':点击tab触发 ; 组件创建时，如果调用tabchange，type为click
+             *      'click':点击tab触发|组件创建时可能触发
              *      'trigger': 代码调用showTab方法触发;
+             * @param tabnode 当前选中的tab节点
+             * @param connode 当前选中的con节点
              */
-            tabchange: function(index,type){}, 
+            tabchange: function(index,type,tabnode,connode){}, 
             /**
              * 组件创建时，是否调用tabchange。默认是false
              * 如果为true,就算是重复点击了，也会调用。如showindex是1，而页面本来默认显示的tab也是1
@@ -64,7 +66,7 @@ define(['$','dom/checknode','base/checkDataType','compatible/deviceevtname'], fu
         /**
          * 显示指定的tab 
          * @param {Number} *index 索引,从1开始
-         * @param {Boolean} *type 触发tabchange的类型。 'click':点击tab触发   'trigger': 代码调用showTab方法触发
+         * @param {Boolean} *type 触发tabchange的类型。 'click':点击tab触发|组件创建时可能触发   'trigger': 代码调用showTab方法触发
          * @param {Boolean} first 是否是组件初始化时调用
          */
         function showTab(index,type,first){
@@ -76,7 +78,7 @@ define(['$','dom/checknode','base/checkDataType','compatible/deviceevtname'], fu
             if(tabs.eq(index-1).hasClass(conf.curclass) && cons.eq(index-1).css('display') != 'none'){ //说明当前index已经是cur状态
                 if(first && conf.initFireChange){ //说明首次要触发change
                     if($checkDataType.isFunction(conf.tabchange)){
-                        conf.tabchange(index,type);
+                        conf.tabchange(index,type,tabs.eq(index-1),cons.eq(index-1));
                     }
                 }
                 return;
@@ -84,7 +86,7 @@ define(['$','dom/checknode','base/checkDataType','compatible/deviceevtname'], fu
             tabs.eq(index-1).addClass(conf.curclass).siblings().removeClass(conf.curclass);
             cons.eq(index-1).show().siblings().hide();
             if($checkDataType.isFunction(conf.tabchange)){
-                conf.tabchange(index,type);
+                conf.tabchange(index,type,tabs.eq(index-1),cons.eq(index-1));
             }
         };
         
