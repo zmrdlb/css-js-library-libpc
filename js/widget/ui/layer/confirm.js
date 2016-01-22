@@ -56,13 +56,13 @@ define(['$','layers/bombLayer','layers/tpl','compatible/deviceevtname','inherit/
 		//事件绑定
 	    this.layer.on($deviceevtname.click, '[node="ok"]', function(e){
 	    	e.preventDefault();
-	    	that.okcal.fire(e);
 	    	that.hide();
+	    	that.okcal.fire(e);
 	    });
 	    this.layer.on($deviceevtname.click, '[node="cancel"]', function(e){
 	    	e.preventDefault();
-	    	that.cancelcal.fire(e);
 	    	that.hide();
+	    	that.cancelcal.fire(e);
 	    });
 	}
 	$extendClass(confirm,$bombLayer);

@@ -48,15 +48,25 @@ define(['$','layers/bombLayer','layers/tpl','compatible/deviceevtname','inherit/
 		var that = this;
 		alert.superclass.constructor.call(this,opt);
 		this.setContent(opt.alert.frametpl);
+		this.contentnode = this.layer.find('[node="content"]'); //内容区节点
 		this.okcal = $.Callbacks();
 		//事件绑定
 	    this.layer.on($deviceevtname.click, '[node="ok"]', function(e){
 	    	e.preventDefault();
-	    	that.okcal.fire(e);
 	    	that.hide();
+	    	that.okcal.fire(e);
 	    });
 	}
 	$extendClass(alert,$bombLayer);
+	/**
+     * 设置alert内容区具有[node="content"]属性的节点的html 
+     * @param {String} html
+     */
+    alert.prototype.setAlertContent = function(html){
+        if(typeof html == 'string' && this.contentnode.size() > 0){
+            this.contentnode.html(html);
+        }
+    };
 	/**
 	 * 组件销毁 
 	 */

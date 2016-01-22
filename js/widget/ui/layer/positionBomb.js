@@ -9,7 +9,7 @@
  * 	 var pos = new $positionBomb({layer:层dom节点});
  * });
  * */
-define(['$','compatible/csssuport','evt/winresize','evt/winscroll','evt/resize','evt/scroll'],function($,$csssuport,$winresize,$winscroll,$resize,$scroll){
+define(['$','compatible/csssuport','evt/winscroll','evt/scroll','evt/winresize','evt/resize'],function($,$csssuport,$winscroll,$scroll,$winresize,$resize){
 	//判断是否可以使用position:fixed方式定位
     var canFix = $csssuport.fixed;
 	/**
@@ -19,14 +19,14 @@ define(['$','compatible/csssuport','evt/winresize','evt/winscroll','evt/resize',
 		var cssopt = {},layer = domopt.layer,offcon = domopt.offcon;
 		layer.css('position',domopt.position);
 		var marginLeft = 0, marginTop = 0;
-		if(domopt.position == 'absolute'){
+		if(domopt.position == 'absolute' && posopt.fixed){
 			marginLeft = offcon.scrollLeft();
 			marginTop = offcon.scrollTop();
 		}
 		switch (posopt.mode){
 			case 'c': //居中定位
-				marginLeft -= (layer.outerWidth()/2+posopt.offset[0]);
-				marginTop -= (layer.outerHeight()/2+posopt.offset[1]);
+				marginLeft -= (Math.max(layer.width(),posopt.minwidth)/2+posopt.offset[0]);
+                marginTop -= (Math.max(layer.height(),posopt.minheight)/2+posopt.offset[1]);
 				cssopt.top = '50%';
 				cssopt.left = '50%';
 				break;
@@ -67,12 +67,22 @@ define(['$','compatible/csssuport','evt/winresize','evt/winscroll','evt/resize',
 		var posopt = $.extend({
 			fixed: true, //是否将弹层始终定位在可视窗口区域，默认为true
 			mode: 'c', //定位模式，枚举。c:中间
-			offset: [0,0] //定义后偏移尺寸 [x轴,y轴]。对于mode是full的模式无效
+			offset: [0,0], //定义后偏移尺寸 [x轴,y轴]。对于mode是full的模式无效
+			sizechange: false, //当mode是c时，offsetParent resize时，待定位层的大小是否会改变
+			minwidth: 0, //定位计算时，待定位层layer的最小宽度
+            minheight: 0 //定位计算时，待定位层layer的最小高度
 		},config || {});
 		var that = this;
 		//初步检测定位参考容器
 		domopt.offcon = domopt.layer.offsetParent();
 		var tagname = domopt.offcon.get(0).tagName.toLowerCase();
+		var listencall = {
+            call: function(){
+                that.setpos();
+            }
+        };
+        var islisscroll = false; //是否监听scroll事件
+        var islisresize = false; //是否监听resize事件
 		if(tagname == 'body' || tagname == 'html'){ //说明相对于页面定位
 		    domopt.offcon = $('body');
 			domopt.offpage = true;
@@ -83,31 +93,44 @@ define(['$','compatible/csssuport','evt/winresize','evt/winscroll','evt/resize',
 		else{ 
 			domopt.position = 'absolute';
 			if(posopt.fixed) { //如果固定定位，则监听scroll事件
-			    var listencall = {
-                    call: function(){
-                        that.setpos();
-                    }
-                };
+			    islisscroll = true;
                 if(domopt.offpage){
                     $winscroll.listen(listencall);
                 }
                 else{
-                    var scroll = new $resize(domopt.offcon);
+                    var scroll = new $scroll(domopt.offcon);
                     scroll.listen(listencall);
                 }
 			}
 		}
+		//说明mode是c时，offsetParent resize时，待定位层的大小会改变，则监听resize事件
+        if(posopt.mode == 'c' && posopt.sizechange){
+            islisresize = true;
+            if(domopt.offpage){
+                $winresize.listen(listencall);
+            }else{
+                var resize = new $resize(domopt.offcon);
+                resize.listen(listencall);
+            }
+        }
 		this.domopt = domopt; //dom参数
 		this.posopt = posopt; //定位参数
 		this.destroy = function(){ //组件销毁方法
 			this.domopt = null;
 			this.posopt = null;
-			if(listencall){
+			if(islisscroll){
 				if(domopt.offpage){
 					$winscroll.unlisten(listencall);
 				}else{
 					scroll.unlisten(listencall);
 				}
+			}
+			if(islisresize){
+			    if(domopt.offpage){
+                    $winresize.unlisten(listencall);
+                }else{
+                    resize.unlisten(listencall);
+                }
 			}
 		};
 	};

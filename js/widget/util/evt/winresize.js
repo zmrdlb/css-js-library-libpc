@@ -8,7 +8,9 @@
  * 		$winresize.listen({call:function(){console.log('窗口resize');}});
  * });
  */
-define(['$','evt/resize'],function($,$resize){
-	var resize = new $resize($(window));
+define(['$','evt/resize','compatible/deviceevtname'],function($,$resize,$deviceevtname){
+	var resize = new $resize($(window),{
+	    evtname: $deviceevtname.winresize
+	});
 	return resize;
 });

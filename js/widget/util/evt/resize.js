@@ -19,9 +19,12 @@ define(['$','evt/delayevt'],function($,$delayevt){
 		if(node.size() == 0){
 			return;
 		}
-		this.delay = new $delayevt(config);
+		var opt = $.extend({
+		    evtname: 'resize'
+		},config);
+		this.delay = new $delayevt(opt);
 		var that = this;
-		node.on('resize',function(){
+		node.on(opt.evtname,function(){
 			that.delay.start();
 		});
 	}
