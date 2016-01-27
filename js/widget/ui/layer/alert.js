@@ -19,8 +19,9 @@
  *   layer.showcal.add(function(type){switch(type){case 'before':console.log('层显示前');break; case 'after':console.log('层显示后');break;}});
  *   layer.hidecal.add(function(type){switch(type){case 'before':console.log('层隐藏前');break; case 'after':console.log('层隐藏后');break;}});
  *   layer.okcal.add(function(e){console.log('点击了确定')});
- *   var contentnode = layer.getNodes(['content']); // 获取node="content"的节点
- *   contentnode.html('内容区html');
+ *   layer.setMyContent('设置node="content"节点的innerHTML');
+ *   var nodeArr = layer.getNodes(['title']); // 获取node="指定属性"的节点
+ *   nodeArr.title.html('内容区html');
  *   layer.contentnode; //内容区node="content"节点
  *   layer.show(); //显示层
  *   layer.hide(); //隐藏层
@@ -62,7 +63,7 @@ define(['$','layers/bombLayer','layers/tpl','compatible/deviceevtname','inherit/
      * 设置alert内容区具有[node="content"]属性的节点的html 
      * @param {String} html
      */
-    alert.prototype.setAlertContent = function(html){
+    alert.prototype.setMyContent = function(html){
         if(typeof html == 'string' && this.contentnode.size() > 0){
             this.contentnode.html(html);
         }

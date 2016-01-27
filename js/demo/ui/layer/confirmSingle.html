@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -8,13 +8,13 @@
 	</head>
 
 	<body>
-		<p>简单消息提示confirm，使用layer/confirmControl。如果是复杂的业务confirm，则建议直接使用layer/confirm。
+		<p>简单消息提示confirm，使用layers/confirmSingle。如果是复杂的业务confirm，则建议直接使用layers/confirm或layers/confirmControl。
 			如果基本弹层业务，直接使用弹层基类layer/bombLayer</p>
 		<script src="http://www.libpc.com/js/manager/requirejs/requirejs2.1.11.js"></script>
 		<script src="http://www.libpc.com/js/config.js"></script>
 		<script>
-			requirejs(['layers/confirmControl'],function($confirmControl){
-				$confirmControl.setconfig({
+			requirejs(['layers/confirmSingle'],function($confirmSingle){
+				$confirmSingle.setconfig({
 					confirm: {
 							frametpl: [
 								'<div node="title"></div>',
@@ -23,8 +23,8 @@
 							].join('')
 					}
 				});
-				$confirmControl.getconfirm().layer.css('background-color','#fff');
-				$confirmControl.show({
+				$confirmSingle.getlayerobj().layer.css('background-color','#fff');
+				$confirmSingle.show({
 					title: '登陆信息',
 					content: '您还未登陆',
 					ok: '去登陆',
