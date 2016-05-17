@@ -12,7 +12,7 @@
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 各种状态处理方法
  * @example
- *   requirejs(['base/fallMsgTips'],function($fallMsgTips){
+ *   requirejs(['libbase/fallMsgTips'],function($fallMsgTips){
  *     var container = $('#myMsgContainer');
  *     var msgtips = new $fallMsgTips({
  *          container: container
@@ -27,7 +27,7 @@
         });
      });
  */
-define(['$','base/checkDataType','compatible/deviceevtname','base/template'],function($,$checkDataType,$deviceevtname,$template){
+define(['$','libbase/checkDataType','libcompatible/deviceevtname','libbase/template'],function($,$checkDataType,$deviceevtname,$template){
     var tpl = {
         loading: [
             '<p class="g-msg-tips loading">',
@@ -89,7 +89,7 @@ define(['$','base/checkDataType','compatible/deviceevtname','base/template'],fun
             msg: '正在加载数据...'
         };
         $.extend(defmsg,msgopt);
-        this._render(defmsg,tpl.loading);
+        this._render(defmsg,this.tpl.loading);
     };
     
     /**
@@ -102,7 +102,7 @@ define(['$','base/checkDataType','compatible/deviceevtname','base/template'],fun
             retrymsg: '点击重新加载'
         };
         $.extend(defmsg,msgopt);
-        this._render(defmsg,tpl.error);
+        this._render(defmsg,this.tpl.error);
     };
     
     /**
@@ -114,7 +114,7 @@ define(['$','base/checkDataType','compatible/deviceevtname','base/template'],fun
             msg: '还未有任何数据'
         };
         $.extend(defmsg,msgopt);
-        this._render(defmsg,tpl.empty);
+        this._render(defmsg,this.tpl.empty);
     };
     
     /**

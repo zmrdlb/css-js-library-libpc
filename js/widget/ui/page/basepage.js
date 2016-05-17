@@ -14,7 +14,7 @@
  *  setpageargs {Function} 设置参数方法
  *  getPageObj {Function} 根据指定页码返回页码列表，详细说明请见该方法注释
  * */
-define(['base/checkDataType'],function($checkDataType){
+define(['libbase/checkDataType'],function($checkDataType){
   /**
    * 分页基类，提供算法，不涉及到dom 
    */

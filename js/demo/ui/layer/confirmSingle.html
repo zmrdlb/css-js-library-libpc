@@ -8,12 +8,12 @@
 	</head>
 
 	<body>
-		<p>简单消息提示confirm，使用layers/confirmSingle。如果是复杂的业务confirm，则建议直接使用layers/confirm或layers/confirmControl。
+		<p>简单消息提示confirm，使用liblayers/confirmSingle。如果是复杂的业务confirm，则建议直接使用liblayers/confirm或liblayers/confirmControl。
 			如果基本弹层业务，直接使用弹层基类layer/bombLayer</p>
 		<script src="http://www.libpc.com/js/manager/requirejs/requirejs2.1.11.js"></script>
 		<script src="http://www.libpc.com/js/config.js"></script>
 		<script>
-			requirejs(['layers/confirmSingle'],function($confirmSingle){
+			requirejs(['liblayers/confirmSingle'],function($confirmSingle){
 				$confirmSingle.setconfig({
 					confirm: {
 							frametpl: [

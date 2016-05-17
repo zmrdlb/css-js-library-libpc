@@ -3,7 +3,7 @@
  * @version 1.0.0 | 2015-11-10 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
  * @example
- *   requirejs(['base/uniqueNum'],function($uniqueNum){
+ *   requirejs(['libbase/uniqueNum'],function($uniqueNum){
  *       var id = 'vote'+$uniqueNum();
  *   });
  */

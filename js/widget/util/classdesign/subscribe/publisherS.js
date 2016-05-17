@@ -6,7 +6,7 @@
  * @return 发布者类
  * @example
  * */
-define(['$','base/checkDataType','classdesign/rwcontroller'],function($,$checkDataType,$rwcontroller){
+define(['$','libbase/checkDataType','libclassdesign/rwcontroller'],function($,$checkDataType,$rwcontroller){
 	function Publisher(){
 		this.subscribers = []; //记录订阅者对象
 		this.rwcontrollder = new $rwcontroller();

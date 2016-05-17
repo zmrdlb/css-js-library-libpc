@@ -11,23 +11,22 @@
 	var mod = {
 		baseUrl: baseUrl, //这个是相对于当前静态页面所处的目录
 		paths: {
-			'jquery': baseUrl+'core/jquery/jquery-1.11.3.min', //采用绝对路径方式引用，js打包不将此文件打包
-			'io': 'widget/io',
-			'media': 'widget/media',
-			'json': 'widget/util/json',
-			'channel': 'widget/util/channel',
-			'layers': 'widget/ui/layer',
-			'nav': 'widget/ui/nav',
-			'inherit': 'widget/util/inherit',
-			'evt': 'widget/util/evt',
-			'dom': 'widget/util/dom',
-			'compatible': 'widget/util/compatible',
-			'bigpipe': 'widget/bigpipe',
-			'load': 'widget/util/load',
-			'base': 'widget/util/base',
-			'classdesign': 'widget/util/classdesign',
-			'tpl': 'widget/util/tpl',
-			'page': 'widget/ui/page'
+			'jquery': 'core/jquery/jquery-1.11.3.min',
+			'hammerjs': 'core/hammerjs/hammerjs.min',
+			'libio': 'widget/io',
+			'libmedia': 'widget/media',
+			'libjson': 'widget/util/json',
+			'libchannel': 'widget/util/channel',
+			'liblayers': 'widget/ui/layer',
+			'libinherit': 'widget/util/inherit',
+			'libevt': 'widget/util/evt',
+			'libdom': 'widget/util/dom',
+			'libcompatible': 'widget/util/compatible',
+			'libload': 'widget/util/load',
+			'libbase': 'widget/util/base',
+			'libclassdesign': 'widget/util/classdesign',
+			'libtpl': 'widget/util/tpl',
+			'libpage': 'widget/ui/page'
 		}
 	};
 	requirejs.config(mod);

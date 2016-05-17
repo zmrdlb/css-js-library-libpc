@@ -6,7 +6,7 @@
  * @example
  * 
  * */
-define(['base/checkDataType'],function($checkDataType){
+define(['libbase/checkDataType'],function($checkDataType){
     /**
      * 工厂模型控制器
      */

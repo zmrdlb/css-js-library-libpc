@@ -8,7 +8,7 @@
  * 		
  * });
  * */
-define(['$','inherit/extendClass','classdesign/subscribe/publisherS'],function($,$extendClass,$publisherS){
+define(['$','libinherit/extendClass','libclassdesign/subscribe/publisherS'],function($,$extendClass,$publisherS){
 	/**
 	 * 对于高频触发的事件进行延迟处理。应用场景：scroll和resize 
 	 * @param {JSON} config 配置

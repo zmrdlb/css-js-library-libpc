@@ -8,12 +8,12 @@
 	</head>
 
 	<body>
-		<p>简单消息提示alert，使用layers/alertSingle。如果是复杂的业务alert，则建议直接使用layers/alert或layers/alertControl。
+		<p>简单消息提示alert，使用liblayers/alertSingle。如果是复杂的业务alert，则建议直接使用liblayers/alert或liblayers/alertControl。
 			如果基本弹层业务，直接使用弹层基类layer/bombLayer</p>
 		<script src="http://www.libpc.com/js/manager/requirejs/requirejs2.1.11.js"></script>
 		<script src="http://www.libpc.com/js/config.js"></script>
 		<script>
-			requirejs(['layers/alertSingle'],function($alertSingle){
+			requirejs(['liblayers/alertSingle'],function($alertSingle){
 				$alertSingle.setconfig({
 					alert: {
 							frametpl: [

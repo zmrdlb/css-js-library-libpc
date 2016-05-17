@@ -5,12 +5,12 @@
  * @version 1.0 | 2015-08-27
  * @return resize类
  * @example
- *  requirejs(['$','evt/resize'],function($,$resize){
+ *  requirejs(['$','libevt/resize'],function($,$resize){
  * 		var resize = new $resize($(window));
  * 		resize.listen({call:function(){console.log('窗口resize');}});
  *  });
  */
-define(['$','evt/delayevt'],function($,$delayevt){
+define(['$','libevt/delayevt'],function($,$delayevt){
 	/**
 	 * @param {Element} *node 元素节点
 	 * @param {JSON} config 延迟配置。同evt/delayevt类的初始化参数 

@@ -3,7 +3,7 @@
  * @version 1.0 | 2015-07-01 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
  * @example
- * requirejs(['base/evalScript'],function($evalScript){
+ * requirejs(['libbase/evalScript'],function($evalScript){
  * 	 $evalScript('console.log(1)');
  * });
  * */

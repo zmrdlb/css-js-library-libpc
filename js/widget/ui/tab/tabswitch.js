@@ -15,7 +15,7 @@
          //tabobj.showTab(2); 手动切换tab显示
  * });
  * */
-define(['$','dom/checknode','base/checkDataType','compatible/deviceevtname'], function($,$checknode,$checkDataType,$deviceevtname){
+define(['$','libdom/checknode','libbase/checkDataType','libcompatible/deviceevtname'], function($,$checknode,$checkDataType,$deviceevtname){
     /**
      * 入口，绑定tab切换 
      * @param {Object} root 根节点
@@ -121,4 +121,5 @@ define(['$','dom/checknode','base/checkDataType','compatible/deviceevtname'], fu
             }
         };
     };
+    return TabSwitch;
 });

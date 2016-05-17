@@ -16,20 +16,23 @@ module.exports = function(grunt) {
 		mfolder: ['widget/ui/layer'], //待打包的文件夹，默认此文件夹下的所有Js都打包。文件夹基于appDir和baseUrl下
 		modules: [{name:'config'}], //modules项初始化
 		paths: { //requirejs.config里面的paths。没有则为{}
-			'$': 'empty:', //采用绝对路径方式引用，js打包不将此文件打包
-			'io': 'widget/io',
-			'media': 'widget/media',
-			'json': 'widget/util/json',
-			'channel': 'widget/util/channel',
-			'layers': 'widget/ui/layer',
-			'inherit': 'widget/util/inherit',
-			'evt': 'widget/util/evt',
-			'compatible': 'widget/util/compatible',
-			'bigpipe': 'widget/bigpipe',
-			'load': 'widget/util/load',
-			'base': 'widget/util/base',
-			'classdesign': 'widget/util/classdesign',
-			'tpl': 'widget/util/tpl'
+			'$': 'empty:', 
+			'jquery': 'empty:',
+			'hammerjs': 'empty:',
+			'libio': 'widget/io',
+            'libmedia': 'widget/media',
+            'libjson': 'widget/util/json',
+            'libchannel': 'widget/util/channel',
+            'liblayers': 'widget/ui/layer',
+            'libinherit': 'widget/util/inherit',
+            'libevt': 'widget/util/evt',
+            'libdom': 'widget/util/dom',
+            'libcompatible': 'widget/util/compatible',
+            'libload': 'widget/util/load',
+            'libbase': 'widget/util/base',
+            'libclassdesign': 'widget/util/classdesign',
+            'libtpl': 'widget/util/tpl',
+            'libpage': 'widget/ui/page'
 	   }
 		/**
 		* 给每个待打包的文件，指定不需要打包的文件.

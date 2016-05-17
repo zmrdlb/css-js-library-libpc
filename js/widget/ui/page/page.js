@@ -26,7 +26,7 @@
  *  resetpage {Function} 重新设置分页参数
  * */
 
-define(['$','compatible/deviceevtname','inherit/extendClass','page/basepage','base/checkDataType','tpl/template','/page/tpl/pagetpl'], 
+define(['$','libcompatible/deviceevtname','libinherit/extendClass','libpage/basepage','libbase/checkDataType','libtpl/template','libpage/tpl/pagetpl'], 
 function($,$deviceevtname,$extendClass,$basepage,$checkDataType,$template,$pagetpl){
   function page(opt){
     var that = this;

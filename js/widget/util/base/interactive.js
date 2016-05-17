@@ -4,7 +4,7 @@
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 投票功能绑定方法
  * @example
- *   requirejs(['base/interactive'],function($interactive){
+ *   requirejs(['libbase/interactive'],function($interactive){
     	var check = $interactive();
     	node.click(function(){
     		if(check.start()){ //可以发起新的处理

@@ -18,7 +18,7 @@
  * @param {String} *filetype 文件类型 对应mediatype里面的键值
  * @param {String} *mediatype 媒体类型 audio或video
  */
-define(['$','media/mediatype'],function($,$mediatype){
+define(['$','libmedia/mediatype'],function($,$mediatype){
 	function getWH(args){
 		if(args == undefined){
 			return '';

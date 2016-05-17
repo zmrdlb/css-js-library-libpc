@@ -5,7 +5,7 @@
  * @return 读写控制器类
  * @example
  * */
-define(['base/checkDataType'],function($checkDataType){
+define(['libbase/checkDataType'],function($checkDataType){
 	function Rwcontroller(){
 		this.readlock = false; //读锁
 		this.writelock = false; //写锁

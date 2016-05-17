@@ -6,14 +6,14 @@
  * 	transRequest {Function} 执行接口接口请求
  *  transQueueRequest {Function} 对一组请求进行单独的队列控制依次请求。全部请求完毕后进行通知。
  * @example
- * requirejs(['io/interio'],function($interio){
+ * requirejs(['libio/interio'],function($interio){
  * 	 $interio.transRequest('inter1name',{
 		success: function(data){},
 		complete: function(){}
 	 });
  * });
  * */
-define(['$','io/ioconfig'],function($,$ioconfig){
+define(['$','libio/ioconfig'],function($,$ioconfig){
 	//请求队列控制类
 	function queueHandle(){
 		this.queue = []; //当前队列数据

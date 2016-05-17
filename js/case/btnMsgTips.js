@@ -4,7 +4,7 @@
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 各种状态处理方法
  * @example
- *   requirejs(['base/btnMsgTips'],function($btnMsgTips){
+ *   requirejs(['libbase/btnMsgTips'],function($btnMsgTips){
     	node.click(function(){
     		$btnMsgTips.start($(this),'loading'); //开始交互
     		$btnMsgTips.end($(this),'loading'); //结束交互
@@ -12,7 +12,7 @@
     	});
      });
  */
-define(['base/checkDataType'],function($checkDataType){
+define(['libbase/checkDataType'],function($checkDataType){
 	return {
 		/**
 		 * 开始交互，给node添加classname 

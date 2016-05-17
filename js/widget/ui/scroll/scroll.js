@@ -200,7 +200,7 @@ SVK.register('widget.scroll.scroll', function($){
       this.animate(left);
     }
     return left;
-  }
+  };
   
   /**
    * 循环滚动 
@@ -212,7 +212,7 @@ SVK.register('widget.scroll.scroll', function($){
       this.animate(left);
     }
     return left;
-  }
+  };
   
   return scroll;
 });

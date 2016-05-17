@@ -1,4 +1,4 @@
-define(['evt/posWinScrollDelay'],function($posWinScroll){
+define(['libevt/posWinScrollDelay'],function($posWinScroll){
     return {
         /**
          * 监听lazyload

@@ -4,7 +4,7 @@
  * @version 1.0 | 2015-06-17 版本信息
  * @author Zhang Mingrui
  * @example
- * requirejs(['json/jsonToQuery'],function($jsonToQuery){
+ * requirejs(['libjson/jsonToQuery'],function($jsonToQuery){
  * 	 $jsonToQuery({name:'aaa',sex:'man'});
  * });
  */

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>hammerjs简单测试</title>
+		<meta name="viewport" content="width=device-width,inital-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+		<meta name="author" content="ZhangMingrui">
+		<style>
+		    #myElement {
+              background: red;
+              height: 300px;
+              width: 300px;
+              text-align: center;
+              font-size: 16px;
+              margin: 20px auto;
+            }
+            .animate {
+                -webkit-transition: all 0.2s;
+                -moz-transition: all 0.2s;
+                transition: all 0.2s;
+            }
+		</style>
+	</head>
+
+	<body>
+		<div id="myElement" class="animate"></div>
+		<script src="http://www.libpc.com/js/manager/requirejs/requirejs2.1.22.js"></script>
+		<script src="http://www.libpc.com/js/config.js"></script>
+		<script>
+			requirejs(['hammerjs'],function(Hammer){
+				var myElement = document.getElementById('myElement');
+                /********简单的手势事件监听********/
+                // create a simple instance
+                // by default, it only adds horizontal recognizers
+                // var mc = new Hammer(myElement,{
+                    // recognizers: [
+                        // // RecognizerClass, [options], [recognizeWith, ...], [requireFailure, ...]
+                        // //[Hammer.Rotate],
+                        // [Hammer.Pan, { direction: Hammer.DIRECTION_ALL }]
+                        // //[Hammer.Swipe,{ direction: Hammer.DIRECTION_HORIZONTAL }],
+                    // ]
+                // });                 
+                // // listen to events...
+                // mc.on("panup pandown panleft panright", function(ev) {
+                  // myElement.innerHTML = ev.type;
+                // });
+                
+                /**************复杂的多手势监听**************/
+                var transform = {};
+                function updateElementTransform() {
+                    var value = [
+                                //'translate3d(' + transform.translate.x + 'px, ' + transform.translate.y + 'px, 0)',
+                                'scale(' + transform.scale + ', ' + transform.scale + ')',
+                                'rotate('+transform.angle+'deg)'
+                                //'rotate3d('+ transform.rx +','+ transform.ry +','+ transform.rz +','+  transform.angle + 'deg)'
+                    ];
+            
+                    value = value.join(" ");
+                    myElement.style.webkitTransform = value;
+                    myElement.style.mozTransform = value;
+                    myElement.style.transform = value;
+                    myElement.innerHTML = value;
+                }
+                var mc = new Hammer.Manager(myElement);
+
+                // create a pinch and rotate recognizer
+                // these require 2 pointers
+                var pinch = new Hammer.Pinch();
+                var rotate = new Hammer.Rotate();
+                
+                // we want to detect both the same time 去除了这行代码，pinch和rotate就不能同时触发，不知道为什么。但是单独只绑定pinch或者rotate可以，一旦两者都绑定必须加此代码。
+                pinch.recognizeWith(rotate);
+                
+                // add to the Manager
+                mc.add([pinch, rotate]);
+                
+                var initScale;
+                transform.scale = 1;
+                mc.on("pinchstart pinchmove", function(ev) {
+                    if(ev.type == 'pinchstart') {
+                        initScale = transform.scale; 
+                        return;
+                    }
+                    transform.scale = initScale * ev.scale;
+                    updateElementTransform();
+                });
+                var initAngle;
+                transform.angle = 0;
+                mc.on("rotatestart rotatemove", function(ev){
+                    if(ev.type == 'rotatestart') {
+                        initAngle = transform.angle;
+                        return;
+                    }
+                    transform.angle = initAngle + ev.rotation;
+                    updateElementTransform();
+                });
+			});
+		</script>
+	</body>
+</html>

@@ -4,7 +4,7 @@
  * @author Zhang Mingrui | 592044573@qq.com
  * @author Zhang Mingrui | mingrui@staff.sina.com.cn
  */
-define(['$','base/checkDataType'],function($,$checkDataType){
+define(['$','libbase/checkDataType'],function($,$checkDataType){
   /**
    * @param *nodes {Object|Element} dom节点的json集合，有效值是Jquery|Zepto的框架的dom对象
    * @param msg dom节点无效的错误信息，填此项则throw error,不填此项则return false

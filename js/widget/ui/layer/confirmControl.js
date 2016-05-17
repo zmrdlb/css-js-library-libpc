@@ -1,10 +1,11 @@
 ﻿/**
  * @fileoverview confirm的工厂控制器，集成baseControl
- * 应用场景：针对频繁更改弹层里某些节点的内容，以及更改点击"确定"、"取消"按钮后的回调事件
+ * 应用场景：针对简单confirm弹层，针对频繁更改弹层里某些节点的内容，以及更改点击"确定"、"取消"按钮后的回调事件
+ * 如果是更复杂的交互建议使用layers.confirm或layers.bombLayer
  * @version 1.0.0 | 2016-01-26 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
  * @example
- * requirejs(['layers/confirmControl'],function($confirmControl){
+ * requirejs(['liblayers/confirmControl'],function($confirmControl){
 		var curconfirm = new $confirmControl();
 		curconfirm.setconfig({
 			confirm: {
@@ -14,7 +15,6 @@
 				].join('')
 			}
 		});
-		curconfirm.getlayerobj()； //layer/confirm类对象
 		curconfirm.show({
 		    content: '您还未登陆'
 		},{
@@ -25,11 +25,12 @@
 				console.log('点击等下说');
 			}
 		});
+		curconfirm.getlayerobj()； //layer/confirm类对象
    });
  * */
-define(['layers/confirm','layers/baseControl','inherit/extendClass'],function($confirm,$baseControl,$extendClass){
+define(['liblayers/confirm','liblayers/baseControl','libinherit/extendClass'],function($confirm,$baseControl,$extendClass){
 	/**
-     * alert工厂控制器
+     * confirm工厂控制器
      */
 	function ConfirmControl(){
 		ConfirmControl.superclass.constructor.call(this);

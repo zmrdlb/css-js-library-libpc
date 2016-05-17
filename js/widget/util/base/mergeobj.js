@@ -3,11 +3,11 @@
  * @version 1.0.0 | 2015-09-14 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
  * @example
- * requirejs(['base/mergeobj'],function($mergeobj){
+ * requirejs(['libbase/mergeobj'],function($mergeobj){
  * 	 $mergeobj({name: 'aa'},{name: 'bb', sex: 'woman'})
  * });
  * */
-define(['base/checkDataType'],function($checkDataType){
+define(['libbase/checkDataType'],function($checkDataType){
 	/**
 	 * 将supers的特定属性（可由argsname指定）或对象merge到sub。如果不制定argsname，则全部merge.
 	 * @param {Object} *sub 需要merge对象

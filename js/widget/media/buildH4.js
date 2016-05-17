@@ -4,7 +4,7 @@
  * @author Zhang Mingrui
  * @example
  */
-define(['$','json/jsonToQuery','media/mediatype'],function($,jsonToQuery,mediatype){
+define(['$','libjson/jsonToQuery','libmedia/mediatype'],function($,jsonToQuery,mediatype){
   /**
    * 构建meidia dom
    * @param {Object} att attribute属性

@@ -4,7 +4,7 @@
  * @version 1.0.0 | 2015-09-14 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
  * @example
- * requirejs(['layer/bombLayer'],function($bombLayer){
+ * requirejs(['liblayers/bombLayer'],function($bombLayer){
  * 	 var layer = new $bombLayer();
  *   layer.showcal.add(function(type){switch(type){case 'before':console.log('层显示前');break; case 'after':console.log('层显示后');break;}});
  *   layer.hidecal.add(function(type){switch(type){case 'before':console.log('层隐藏前');break; case 'after':console.log('层隐藏后');break;}});
@@ -17,7 +17,7 @@
  *   layer.destroy(); //销毁层
  * });
  * */
-define(['$','layers/layer','layers/mask','inherit/extendClass','layers/positionBomb','compatible/deviceevtname','base/checkDataType'],function($,$layer,$mask,$extendClass,$positionBomb,$deviceevtname,$checkDataType){
+define(['$','liblayers/layer','liblayers/mask','libinherit/extendClass','liblayers/positionBomb','libcompatible/deviceevtname','libbase/checkDataType'],function($,$layer,$mask,$extendClass,$positionBomb,$deviceevtname,$checkDataType){
 	/**
 	 * 弹层类——创建并添加到指定容器中
      * @param {JSON} config 弹层配置参数 ，不是必填项
@@ -105,14 +105,14 @@ define(['$','layers/layer','layers/mask','inherit/extendClass','layers/positionB
 	 */
 	bombLayer.prototype.destroy = function(){
 		this.layer.off($deviceevtname.click, '[node="close"]');
-		if(this._newcontainer){
-			this.container.remove();
-			this._newcontainer = null;
-		}
 		bombLayer.superclass.destroy.call(this);
 		this.pos.destroy();
 		if(this.mask){
-			this.mask.destroy();
+            this.mask.destroy();
+        }
+		if(this._newcontainer){
+			this.container.remove();
+			this._newcontainer = null;
 		}
 	};
 	return bombLayer;

@@ -24,7 +24,7 @@
          attributes: {}
  *    }
  */
-define(['$','media/buildH4','media/buildH5','media/mediatype'],function($,H4,H5,$mediatype){
+define(['$','libmedia/buildH4','libmedia/buildH5','libmedia/mediatype'],function($,H4,H5,$mediatype){
 	var tdom = document.createElement('audio');
 	function audioplayer(config){
 		var hasaudio =(!!tdom.canPlayType && tdom.canPlayType($mediatype[config.custom.filetype].h5type) != '');

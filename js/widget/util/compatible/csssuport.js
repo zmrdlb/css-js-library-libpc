@@ -4,7 +4,7 @@
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 
  * @example
- * requirejs(['compatible/csssuport'],function($csssuport){
+ * requirejs(['libcompatible/csssuport'],function($csssuport){
  * 	 $csssuport.fixed;
  * });
  * */

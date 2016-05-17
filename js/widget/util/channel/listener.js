@@ -5,7 +5,7 @@
  * @return 更多详细信息参考代码里对应定义方法或属性位置的注释说明
  * 	register {Function} 注册频道
  * @example
- *  requirejs(['channel/listener'],function($listener){
+ *  requirejs(['libchannel/listener'],function($listener){
  * 	  var loginChannel = $listener.register(['loginSuccess','loginFail']);
  *    loginChannel.loginSuccess.add(function(){console.log('登录成功')});
  *    loginChannel.loginSuccess.fire();

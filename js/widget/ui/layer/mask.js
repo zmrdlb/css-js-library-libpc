@@ -16,7 +16,7 @@
  *   });
  * });
  * */
-define(['$','layers/positionBomb','compatible/deviceevtname'],function($,$positionBomb,$deviceevtname){
+define(['$','liblayers/positionBomb','libcompatible/deviceevtname'],function($,$positionBomb,$deviceevtname){
 	/**
 	 * 遮罩类——创建遮罩dom并添加到指定容器中 
      * @param {Element} container 遮罩存放容器，默认为$('body')

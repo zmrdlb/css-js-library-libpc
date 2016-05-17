@@ -6,7 +6,7 @@
  * @version 1.0.0 | 2015-09-14 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
  * @example
- * requirejs(['layer/alert'],function($alert){
+ * requirejs(['liblayers/alert'],function($alert){
  * 	 var layer = new $alert({
  * 	 	alert: {
  * 			frametpl: [ //弹层基本模板
@@ -30,7 +30,7 @@
  *   layer.destroy(); //销毁层
  * });
  * */
-define(['$','layers/bombLayer','layers/tpl','compatible/deviceevtname','inherit/extendClass'],function($,$bombLayer,$tpl,$deviceevtname,$extendClass){
+define(['$','liblayers/bombLayer','liblayers/tpl','libcompatible/deviceevtname','libinherit/extendClass'],function($,$bombLayer,$tpl,$deviceevtname,$extendClass){
 	/**
 	 * alert类
      * @param {Object} config 参数同layer/bombLayer里面的config,在此基础上增加如下默认配置

@@ -1,10 +1,11 @@
 ﻿/**
- * @fileoverview alert的工厂控制器，集成baseControl
- * 应用场景：针对频繁更改弹层里某些节点的内容，以及更改点击"确定"按钮后的回调事件
+ * @fileoverview alert的工厂控制器，继承baseControl
+ * 应用场景：针对简单alert弹层，频繁更改弹层里某些节点的内容，以及更改点击"确定"按钮后的回调事件
+ * 如果是更复杂的交互建议使用layers.alert或layers.bombLayer
  * @version 1.0.0 | 2016-01-26 版本信息
  * @author Zhang Mingrui | 592044573@qq.com
  * @example
- * requirejs(['layers/alertControl'],function($alertControl){
+ * requirejs(['liblayers/alertControl'],function($alertControl){
 		var curlayer = new $alertControl();
 		curlayer.setconfig({
 			alert: {
@@ -15,7 +16,6 @@
 				].join('')
 			}
 		});
-		curlayer.getlayerobj()； //layer/alert类对象
 		curlayer.show({
             content: '您还未登陆'
         },{
@@ -23,9 +23,10 @@
                 console.log('点击好的');
             }
         });
+        curlayer.getlayerobj()； //layer/alert类对象
    });
  * */
-define(['layers/alert','layers/baseControl','inherit/extendClass'],function($alert,$baseControl,$extendClass){
+define(['liblayers/alert','liblayers/baseControl','libinherit/extendClass'],function($alert,$baseControl,$extendClass){
     /**
      * alert工厂控制器
      */

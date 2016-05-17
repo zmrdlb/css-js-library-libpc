@@ -4,12 +4,12 @@
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 方法
  * @example
- *   requirejs(['base/numToCC'],function($numToCC){
+ *   requirejs(['libbase/numToCC'],function($numToCC){
         $numToCC(1); //返回'一'
         $numToCC('选项1'); //返回'选项一'
      });
  */
-define(['base/checkDataType'],function($checkDataType){
+define(['libbase/checkDataType'],function($checkDataType){
     var ccarr = ['零','一','二','三','四','五','六','七','八','九'];
     /**
      * 将字符串str中的数字0-9转换成中文大写

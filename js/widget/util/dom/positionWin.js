@@ -4,7 +4,7 @@
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 调用方法
  * @example
- * 	requirejs(['dom/positionWin'],function($positionWin){
+ * 	requirejs(['libdom/positionWin'],function($positionWin){
  * 		var pos = $positionWin(jquery node节点对象);
  *  });
  * */

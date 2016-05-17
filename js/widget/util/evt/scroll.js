@@ -5,15 +5,15 @@
  * @version 1.0 | 2015-08-27
  * @return scroll类
  * @example
- *  requirejs(['$','evt/scroll'],function($,$scroll){
+ *  requirejs(['$','libevt/scroll'],function($,$scroll){
  * 		var scroll = new $scroll($(window));
  * 		scroll.listen({call:function(){console.log('窗口scroll');}});
  *  });
  */
-define(['$','evt/delayevt'],function($,$delayevt){
+define(['$','libevt/delayevt'],function($,$delayevt){
 	/**
 	 * @param {Element} *node 元素节点
-	 * @param {JSON} config 延迟配置。同evt/delayevt类的初始化参数 
+	 * @param {JSON} config 延迟配置。同libevt/delayevt类的初始化参数 
 	 */
 	function scroll(node,config){
 		if(node.size() == 0){

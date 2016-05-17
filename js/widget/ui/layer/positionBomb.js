@@ -9,7 +9,7 @@
  * 	 var pos = new $positionBomb({layer:层dom节点});
  * });
  * */
-define(['$','compatible/csssuport','evt/winscroll','evt/scroll','evt/winresize','evt/resize'],function($,$csssuport,$winscroll,$scroll,$winresize,$resize){
+define(['$','libcompatible/csssuport','libevt/winscroll','libevt/scroll','libevt/winresize','libevt/resize'],function($,$csssuport,$winscroll,$scroll,$winresize,$resize){
 	//判断是否可以使用position:fixed方式定位
     var canFix = $csssuport.fixed;
 	/**

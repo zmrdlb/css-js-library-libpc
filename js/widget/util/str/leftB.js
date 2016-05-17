@@ -4,11 +4,11 @@
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 方法
  * @example
- *   requirejs(['base/bLength'],function($bLength){
+ *   requirejs(['libbase/bLength'],function($bLength){
     	$bLength('我aa到底占用多少个字节');
      });
  */
-define(['base/bLength','base/checkDataType'],function($bLength,$checkDataType){
+define(['libbase/bLength','libbase/checkDataType'],function($bLength,$checkDataType){
     /**
      * @param {String} *str 待截取的字符串
      * @param {Number} *lens 字节数

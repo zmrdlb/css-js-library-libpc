@@ -9,7 +9,7 @@
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 调用方法
  * @example
- * 	requirejs(['dom/posWinSR'],function($posWinSR){
+ * 	requirejs(['libdom/posWinSR'],function($posWinSR){
  * 		$posWinSR.listenPos({
  * 			node: jquery Node节点对象
  * 			call: function(pos,node){console.log(pos);console.log(node);},
@@ -17,7 +17,7 @@
  * 		});	
  *  });
  */
-define(['$','base/checkDataType','dom/positionWin','evt/winscroll'],function($,$checkDataType,$positionWin,$winscroll){
+define(['$','libbase/checkDataType','libdom/positionWin','libevt/winscroll'],function($,$checkDataType,$positionWin,$winscroll){
 	var cache = []; //数据缓存
 	/**
 	 * 获取位置

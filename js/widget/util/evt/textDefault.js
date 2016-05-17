@@ -8,7 +8,7 @@
  * @version 1.0 | 2015-11-03
  * @example
  */
-define(['$','base/checkDataType'],function($,$checkDataType){
+define(['$','libbase/checkDataType'],function($,$checkDataType){
   var isPlaceholderSupport = (function(){  
      return 'placeholder' in document.createElement('input');  
   })();

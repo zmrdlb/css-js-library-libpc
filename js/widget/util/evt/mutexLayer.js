@@ -6,7 +6,7 @@
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 
  * @example
- * requirejs(['$','evt/mutexLayer'],function($,$mutexLayer){
+ * requirejs(['$','libevt/mutexLayer'],function($,$mutexLayer){
  *      var mutex = new $mutexLayer({
  *          //必填
  *          node: 我的浮层节点
@@ -18,7 +18,7 @@
  *      mutex.show();
  * });
  * */
-define(['$','base/uniqueNum','dom/checknode','base/mergeobj','compatible/deviceevtname','base/checkDataType'],
+define(['$','libbase/uniqueNum','libdom/checknode','libbase/mergeobj','libcompatible/deviceevtname','libbase/checkDataType'],
 function($,$uniqueNum,$checknode,$mergeobj,$deviceevtname,$checkDataType){
     var bodyCall = $.Callbacks(); //点击body的回调
     $('body').on($deviceevtname.click,function(e){
@@ -41,9 +41,9 @@ function($,$uniqueNum,$checknode,$mergeobj,$deviceevtname,$checkDataType){
             bodyhide: true, //是否当点击浮层以外的空白区域时，触发浮层的隐藏回调事件
             otherhide: true //是否当属于同一个group的其他浮层显示时，触发浮层的隐藏回调事件
         },opt);
-        $checknode(opt.node,'组件evt/mutexLayer传入参数node无效');
+        $checknode(opt.node,'组件libevt/mutexLayer传入参数node无效');
         if(!$checkDataType.isFunction(opt.onhide)){
-            throw new Error('组件evt/mutexLayer传入参数onhide无效');
+            throw new Error('组件libevt/mutexLayer传入参数onhide无效');
         }
         //赋值
         this.unique = $uniqueNum(); //浮层唯一键值

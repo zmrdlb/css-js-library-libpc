@@ -8,7 +8,7 @@
  * }
  * @return page类分页对象。如果noone设置导致分页对象不创建，返回null
  * @example
- * requirejs(['$','module/ui/page/horizontalpage'],function($,$page){
+ * requirejs(['$','demo/ui/page/horizontalpage'],function($,$page){
             $page({
                 pageargs: {
                     pageCount: 100,
@@ -23,7 +23,7 @@
             });
         });
  * */
-define(['$','page/page','page/tpl/horizontaltpl','base/checkDataType'], function($,$page,$tpl,$checkDataType){
+define(['$','libpage/page','demo/ui/page/horizontaltpl','libbase/checkDataType'], function($,$page,$tpl,$checkDataType){
   return function(opt){
     opt = $.extend({
         pageargs: {

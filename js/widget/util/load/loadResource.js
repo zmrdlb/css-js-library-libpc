@@ -10,7 +10,7 @@ define(['$'],function($){
 			ref.onload = ref.onerror = ref.onreadystatechange = null;
 			// 移除资源
 			if (ref.parentNode) {
-				//ref.parentNode.removeChild(ref);
+				ref.parentNode.removeChild(ref);
 			}
 			ref = null;
 			if(typeof config.oncomplete == 'function'){

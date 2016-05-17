@@ -11,7 +11,7 @@
  * @author Zhang Mingrui | 592044573@qq.com
  * @return 各种状态处理方法
  * @example
- *   requirejs(['base/listMsgTips'],function($listMsgTips){
+ *   requirejs(['libbase/listMsgTips'],function($listMsgTips){
     	node.click(function(){
     	    var container = $(this);
     	    $listMsgTips.loading({
@@ -34,7 +34,7 @@
     	});
      });
  */
-define(['$','base/checkDataType','compatible/deviceevtname','base/template'],function($,$checkDataType,$deviceevtname,$template){
+define(['$','libbase/checkDataType','libcompatible/deviceevtname','libbase/template'],function($,$checkDataType,$deviceevtname,$template){
     var tpl = {
         loading: [
             '<p node="listmsgstate_loading" class="g-msg-tips loading">',

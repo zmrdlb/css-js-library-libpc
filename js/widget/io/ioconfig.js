@@ -9,7 +9,7 @@
  *  getTrans {Function} 获取接口配置
  *  globalSetup {Function} 设置全局ajax配置
  * @example
- * requirejs(['io/ioconfig'],function($ioconfig){
+ * requirejs(['libio/ioconfig'],function($ioconfig){
  * 	 //配置未登陆统一处理相关参数
 	 $ioconfig.login.url = 'http://baidu.com/';
 	 $ioconfig.login.filter = function(data){
@@ -38,8 +38,18 @@ define(['$'],function($){
      * 如code == 'A0001' 算成功，其他都算失败
      */
 	that.error = {
-	    funname: 'error', //当发送业务错误的时候，调用的格式同于ioargs里的函数的函数名。默认是error
+	    funname: 'fail', //当发生业务错误的时候，调用的格式同于ioargs里的函数的函数名。默认是error
 	    filter: function(data){return false;} //如果此函数返回true则说明当前接口返回业务错误信息。data是接口返回的数据
+	    /**
+	     * 如果接受业务错误信息统一处理，则可以按照以下方式填写：
+	     * reqiurejs(['libio/ioconfig'],function($ioconfig){
+	     *     $ioconfig.error = {
+	     *         funname: 'fail',
+	     *         filter: function(data){if(data && data.errcode != 0){return true;}}
+	     *     };
+	     *     $ioconfig.ioargs.fail = function(data){ alert(data.errmsg || '网络错误'); }
+	     * });
+	     */
 	};
 	that.ioargs = { //io请求默认的参数格式
 		//同ajax参数官方说明项
@@ -47,7 +57,8 @@ define(['$'],function($){
 		method: 'GET',
 		complete: function(jqXHR, textStatus){},
 		success: function(data, textStatus, jqXHR){},
-		error: function(jqXHR, textStatus, errorThrown){},
+		error: function(jqXHR, textStatus, errorThrown){ alert('网络错误'); },
+		fail: function(result){},
 		//自定义数据
 		customconfig:{
 			mode: 'ajax', //使用什么方式请求，默认是ajax(ajax方式默认返回的是json格式的数据。也可通过在和method参数同级的位置设置dataType参数来改变默认的json设置)。可用的参数有ajax|jsonp|script

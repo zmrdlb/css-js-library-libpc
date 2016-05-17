@@ -40,7 +40,7 @@ SVK.register('widget.scroll.baseScroll', function($){
         that.canscroll = true; //是否可以滚动
         that.count = Math.ceil(that.alllen/that.len);
       }
-    }
+    };
     var conf = $.extend({
       len: 0, //每次滚动的长度
       alllen: 0 //总共滚动的长度
@@ -65,7 +65,7 @@ SVK.register('widget.scroll.baseScroll', function($){
       else{
         this.left = 0;
       }
-    }
+    };
   };
   
   /**
@@ -85,7 +85,7 @@ SVK.register('widget.scroll.baseScroll', function($){
     else{
       return true;
     }
-  }
+  };
   
   /**
    * 是否还有下一页,包括滚动区存在截断不能填满的情况
@@ -97,7 +97,7 @@ SVK.register('widget.scroll.baseScroll', function($){
     else{
       return true;
     }
-  }
+  };
   
   /**
    * 上一页
@@ -111,7 +111,7 @@ SVK.register('widget.scroll.baseScroll', function($){
     else{
       return null;
     }
-  }
+  };
   
   /**
    * 下一页
@@ -125,7 +125,7 @@ SVK.register('widget.scroll.baseScroll', function($){
     else{
       return null;
     }
-  }
+  };
   
   /**
    * 定位到第几屏滚动
@@ -144,7 +144,7 @@ SVK.register('widget.scroll.baseScroll', function($){
     else{
       return null;
     }
-  }
+  };
   
   /**
    * 循环滚动 
@@ -170,7 +170,7 @@ SVK.register('widget.scroll.baseScroll', function($){
       }
     }
     return this.left;
-  }
+  };
   
   return baseScroll;
 });
