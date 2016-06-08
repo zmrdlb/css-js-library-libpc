@@ -23,6 +23,7 @@
 			'libdom': 'widget/util/dom',
 			'libcompatible': 'widget/util/compatible',
 			'libload': 'widget/util/load',
+			'libstr': 'widget/util/str',
 			'libbase': 'widget/util/base',
 			'libclassdesign': 'widget/util/classdesign',
 			'libtpl': 'widget/util/tpl',

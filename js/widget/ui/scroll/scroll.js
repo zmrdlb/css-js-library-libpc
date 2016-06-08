@@ -57,6 +57,10 @@ SVK.register('widget.scroll.scroll', function($){
       scrolllen: 0, //待滚动区域的长度|宽(x轴)或者高(y轴)，如果设立此值就覆盖掉了根据scrollNode算的长度
       screenlen: 0, //每次滚动的长度|宽(x轴)或者高(y轴)，如果设立此值就覆盖掉了根据conNode算的长度
       type: 'x', //滚动类型 x轴滚动或者y轴滚动
+      animateName: { //滚动使用的css属性
+          'x': 'margin-left', //可以是left
+          'y': 'margin-top' //可以是top
+      },
       change: false, //滚动区域是否会根据窗口大小改变
       direction: 'shun', //循环滚动的滚动方向   shun:顺时针  ni:逆时针  默认为shun
       animateOption: { //滚动动画相关配置参数，参考jjquery.animate( properties, options )方法的第二个参数options
@@ -65,50 +69,44 @@ SVK.register('widget.scroll.scroll', function($){
     }, opt || {});
     $checknode(conf.nodes,'参数nodes中的节点无效');
     var isabsolute = conf.nodes.scrollNode.css('position')=='absolute'? true: false;
-    var animateName = '';
-    if(conf.type == 'x'){
-      animateName = 'margin-left';
-    }
-    else{
-      animateName = 'margin-top';
-    }
+    var animateName = conf.animateName[conf.type];
     /**
-     * 获取滚动区域容器大小 
+     * 私有获取滚动区域容器大小 
      * zepto api省去了outerWidth和innerWidth。所以在这里和jquery api做了兼容
      */
     var getConSize = function(){
-      var len = conf.screenlen || 0;
-      var alllen = conf.scrolllen || 0;
-      if(conf.type == 'x'){
-        if(typeof alllen != 'number' || alllen <= 0){
-          alllen = conf.nodes.scrollNode.outerWidth? conf.nodes.scrollNode.outerWidth(): conf.nodes.scrollNode.width();
-        }
-        if(typeof len != 'number' || len <= 0){
-        	if(isabsolute){
-	          len = conf.nodes.conNode.innerWidth? conf.nodes.conNode.innerWidth(): conf.nodes.conNode.width();
-	        }
-	        else{
-	          len = conf.nodes.conNode.width();
-	        }
-        }
-      }
-      else{
-        if(typeof alllen != 'number' || alllen <= 0){
-          alllen = conf.nodes.scrollNode.outerHeight? conf.nodes.scrollNode.outerHeight(): conf.nodes.scrollNode.height();
-        }
-        if(typeof len != 'number' || len <= 0){
-        	if(isabsolute){
-	          len = conf.nodes.conNode.innerHeight? conf.nodes.conNode.innerHeight(): conf.nodes.conNode.height();
-	        }
-	        else{
-	          len = conf.nodes.conNode.height();
-	        }
-        }
-      }
-      return {
-        len: parseInt(len),
-        alllen: parseInt(alllen)
-      };
+          var len = conf.screenlen || 0;
+          var alllen = conf.scrolllen || 0;
+          if(conf.type == 'x'){
+            if(typeof alllen != 'number' || alllen <= 0){
+              alllen = conf.nodes.scrollNode.outerWidth? conf.nodes.scrollNode.outerWidth(): conf.nodes.scrollNode.width();
+            }
+            if(typeof len != 'number' || len <= 0){
+                if(isabsolute){
+                  len = conf.nodes.conNode.innerWidth? conf.nodes.conNode.innerWidth(): conf.nodes.conNode.width();
+                }
+                else{
+                  len = conf.nodes.conNode.width();
+                }
+            }
+          }
+          else{
+            if(typeof alllen != 'number' || alllen <= 0){
+              alllen = conf.nodes.scrollNode.outerHeight? conf.nodes.scrollNode.outerHeight(): conf.nodes.scrollNode.height();
+            }
+            if(typeof len != 'number' || len <= 0){
+                if(isabsolute){
+                  len = conf.nodes.conNode.innerHeight? conf.nodes.conNode.innerHeight(): conf.nodes.conNode.height();
+                }
+                else{
+                  len = conf.nodes.conNode.height();
+                }
+            }
+          }
+          return {
+            len: parseInt(len),
+            alllen: parseInt(alllen)
+          };
     };
     this._animateProp = {}; //滚动动画css配置，参考jquery.animate( properties, options )方法的第一个参数properties
     this._animateOption = conf.animateOption;
@@ -131,13 +129,20 @@ SVK.register('widget.scroll.scroll', function($){
         evtname = 'onorientationchange';
       }
       $(window).bind(evtname, function(){
-        var size = getConSize();
-        if(size.len != this.len || size.alllen != this.alllen){
-          that.resizeBeginCal.fire();
-          that.resetParam(size);
-          that.scrollNode.css(animateName, that.left + 'px');
-          that.resizeEndCal.fire();
-        }
+           var size = {
+                len: 0, //每次滚动长度
+                alllen: 0 //总共滚动长度
+           };
+           //针对scrolllen或screenlen给出>0的数据的情况下，说明是无法通过节点计算出尺寸的。此时可以通过json的引用传递让resizeBeginCal自行修改size中的尺寸
+           that.resizeBeginCal.fire(size); 
+           if(size.len == 0 || size.alllen == 0){ //说明resizeBeginCal没有对size处理
+               size = getConSize();
+           }
+           if(size.len != this.len || size.alllen != this.alllen){
+              that.resetParam(size);
+              that.scrollNode.css(animateName, that.left + 'px');
+              that.resizeEndCal.fire(size);
+           }
       });
     }
   }

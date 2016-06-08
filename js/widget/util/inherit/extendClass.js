@@ -27,6 +27,7 @@ define(['libbase/mergeobj'],function($mergeobj){
      * superClass 父类
      * 在子类的构造函数中，初始化父类的构造函数可使用如下操作：
      * subClass.superclass.constructor.call(this, 一系列参数); 
+     * subClass的实例假设为sub  sub instanceof subClass和superClass都为true
      */
     function ExtendClass(subClass, superClass) {
         //第一种方法
