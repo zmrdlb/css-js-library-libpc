@@ -1,5 +1,4 @@
 /**
- * Copyright (c) 2013 - 2014, Sina Inc. All rights reserved.
  * @fileoverview Sina 基本滚动类，主要用于根据滚动区域和容器的尺寸永远计算各种滚动类型该滚动的距离
  * @version 1.0 | 2014-02-28 版本信息
  * @author Zhang Mingrui | mingrui@staff.sina.com.cn
@@ -23,7 +22,7 @@
  * focus {Function} 定位到第几屏滚动
  * circle {Function} 循环滚动
  */
-SVK.register('widget.scroll.baseScroll', function($){
+define(['$'], function($){
   /**
    * 计算滚动数据项的基类
    * @param {Object} opt

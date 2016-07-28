@@ -20,13 +20,15 @@
 	/**
 	 * 给一个函数指定上下文
 	 */
-	Function.prototype.bind = function(context){
-		var that = this;
-		return function(){
-			var args = Array.prototype.slice.call(arguments, 0);
-			that.apply(context,args);
-		};
-	};
+	if(typeof Function.prototype.bind != 'function'){
+        Function.prototype.bind = function(context){
+            var that = this;
+            return function(){
+                var args = Array.prototype.slice.call(arguments, 0);
+                that.apply(context,args);
+            };
+        };
+    }
 	/**
 	 * 遍历数组，并依次删除.
 	 */
