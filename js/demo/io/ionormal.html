@@ -23,6 +23,10 @@
 				//配置业务错误统一处理相关参数
 				$ioconfig.error.filter = function(data){
 				    return data.code != 'A0001';
+				    //如果配置了$ioconfig.login 则 return data.code != 'A0001' && data.code != 'A0003';
+				};
+				$ioconfig.ioargs.fail = function(result){
+				    alert(result.errmsg);
 				};
 				
 				//接口配置参数格式请参见$ioconfig.ioargs
@@ -40,33 +44,28 @@
 				
 				var dom = $('#result');
 				function success(data){
-					dom.append('<h3>'+data.data+'</h3>');
+					dom.append('<h3>'+data+'</h3>');
 					console.log('接口请求成功');
 				}
 				function complete(){
 					console.log('接口请求完成');
 				}
-				function error(data){
-				    console.log('业务错误和网络错误都调用此处理。如果是业务错误，data则是接口返回的数据；如果是系统错误，data则是jquery ajax error方法的第一个参数');
-				    if(data && data.errormsg){
-				        console.log(errormsg);
-				    }else{
-				        console.log('请求接口调用了jquery ajax error的配置方法');
-				    }
-				}
+				
 				$interio.transRequest('inter1name',{
 					success: success,
-					error: error,
 					complete: complete
 				});
 				$interio.transRequest('inter2name',{
-					success: success,
-					error: error,
-					complete: complete
+					success: function(result){
+					    dom.append('<h3>dealerror设置为false: '+result.code+' | '+result.errmsg+'</h3>');
+					},
+					complete: complete,
+					customconfig: {
+					    dealerror: false //不统一处理业务错误
+					}
 				});
 				$interio.transRequest('inter3name',{
                     success: success,
-                    error: error,
                     complete: complete
                 });
 			});

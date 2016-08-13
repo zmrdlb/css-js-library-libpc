@@ -20,6 +20,15 @@
 					return data.code == 'A0003';
 				};*/
 				
+				//配置业务错误统一处理相关参数
+                $ioconfig.error.filter = function(data){
+                    return data.code != 'A0001';
+                    //如果配置了$ioconfig.login 则 return data.code != 'A0001' && data.code != 'A0003';
+                };
+                $ioconfig.ioargs.fail = function(result){
+                    alert(result.errmsg);
+                };
+                
 				//配置接口
 				$ioconfig.setTrans([
 					{name: 'inter1name', args: {url:baseUrl+'inter1.json',method:'GET'}},
