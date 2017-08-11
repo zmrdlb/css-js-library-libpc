@@ -9,3 +9,13 @@ js: 将会包括分页，图片上传，图片轮播动画，io请求，bigpipe�
 兼容ie8及以上浏览器
 
 此工程有大量的使用文档和相关demo，更多说明请见wiki
+
+现在这个设计已废弃，请使用新的https://github.com/zmrdlb/widgetpc
+
+但是里面有一个很有用的功能点我没有移植：
+
+bigpipe: https://github.com/zmrdlb/css-js-library-libpc/tree/master/js/demo/bigpipe
+
+bigpipe相关说明：
+
+  http://isux.tencent.com/bigpipe-pipelining-web-pages-for-high-performance.html
